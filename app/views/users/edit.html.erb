@@ -1,0 +1,20 @@
+<h1>ユーザー情報を編集する</h1>
+<hr>
+<%= form_for @user do |f| %>
+  <p>名前</p>
+  <%= f.text_field :name, :class => "form-control my-form" %>
+  <p>生年月日</p>
+  <%= f.date_field :birdhday, :class => "form-control my-form" %>
+  <p>ユーザータイプ</p>
+  <%= f.select :user_type, [["講師", "講師"],["生徒", "生徒"], ["その他", "その他"]] , :selected => "select" , :class => "form-control my-form" %>
+  <p>メールアドレス</p>
+  <%= f.email_field :email, :class => "form-control my-form" %>
+  <p>プロフィール写真</p>
+  <%= f.file_field :icon, :class => "form-control my-form" %>
+  <p>自己紹介</p>
+  <%= f.text_area :profile, :class => "form-control my-form" %>
+  <hr>
+  <%= f.submit "登録する", :class => "btn btn-primary" %>
+<% end %>
+<hr>
+<a href="/users/<%= @user.id %>" class="btn btn-info">ユーザー情報に戻る</a>

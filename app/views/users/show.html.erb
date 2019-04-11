@@ -1,0 +1,11 @@
+<h1>ユーザー情報</h1>
+<hr>
+<p>名前：<%= @user.name %>さん</p>
+<p>ユーザータイプ：<%= @user.user_type%></p>
+<p>自己紹介：<%= @user.profile %></p>
+<hr>
+<p><a href="/posts" class="btn btn-info">トップに戻る</a></p>
+<p><a href="/users" class="btn btn-primary">ユーザー一覧に戻る</a></p>
+<% if @user.id == current_user.id %>
+<p><a href="/users/<%= @user.id %>/edit" class="btn btn-success">ユーザー情報を編集する</a>
+<% end %>

@@ -1,0 +1,65 @@
+<h2>新規登録</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  
+  <div class="field">
+  <%= f.input :postcode %>
+  <%= f.input :prefecture_code, collection: JpPrefecture::Prefecture.all, :value_method => :name, include_blank: '都道府県' %>
+  <%= f.input :address_city %>
+  <%= f.input :address_street %>
+  <%= f.input :address_building %>
+  <%= f.button :submit %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :名前 %><br />
+    <%= f.text_field :name, autofocus: true, :class => "form-control my-form" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :生年月日 %><br />
+    <%= f.date_field :birdhday, autofocus: true, :class => "form-control my-form" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :性別 %><br />
+    <label>
+　　<%= f.radio_button :gender, "男" %> 男 </label>
+　　<label><%= f.radio_button :gender, "女" %> 女</label>
+  </div>
+  
+  <div class="field">
+   <%= f.label :ユーザータイプ %><br>
+   <%= f.select :user_type, [["講師", "講師"],["生徒", "生徒"], ["その他", "その他"]] ,:prompt => "選択してください" , :class => "form-control my-form" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :プロフィール写真 %><br />
+    <%= f.file_field :icon, :class => "form-control my-form" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, :class => "form-control my-form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", :class => "form-control my-form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :確認用パスワード %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control my-form" %>
+  </div>
+　<br>
+  <div class="actions">
+    <%= f.submit "新規登録", :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
