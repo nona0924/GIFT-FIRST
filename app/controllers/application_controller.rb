@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
   
-  protected
+  # protected
 
-  def configure_permitted_parameters
-    added_attrs = [:name, :birdhday, :gender, :user_type, :icon, :email, :password, :password_confirmation, :remember_me, :postcode, :prefecture_name, :address_city, :address_street, :address_building]
-    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
-  end
+  # def configure_permitted_parameters
+  #   added_attrs = [:name, :birdhday, :gender, :user_type, :icon, :email, :password, :password_confirmation, :remember_me]
+  #   devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+  #   devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  # end
 end

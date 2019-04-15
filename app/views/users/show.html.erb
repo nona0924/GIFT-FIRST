@@ -1,11 +1,37 @@
+<div class="row">
+  <div class="col-xs-6">
 <h1>ユーザー情報</h1>
 <hr>
+<p>プロフィール画像</p>
+<%= f.file_field :icon, :class => "form-control my-form"%>
+<br>
 <p>名前：<%= @user.name %>さん</p>
 <p>ユーザータイプ：<%= @user.user_type%></p>
 <p>自己紹介：<%= @user.profile %></p>
 <hr>
-<p><a href="/posts" class="btn btn-info">トップに戻る</a></p>
-<p><a href="/users" class="btn btn-primary">ユーザー一覧に戻る</a></p>
 <% if @user.id == current_user.id %>
-<p><a href="/users/<%= @user.id %>/edit" class="btn btn-success">ユーザー情報を編集する</a>
-<% end %>
+<p><a href="/users/edit" class="btn btn-success">ユーザー情報を編集する</a>
+
+<% else %>
+      <%= form_for @room do |f| %>
+       <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, :value => @user.id %>
+      <% end %>
+        <%= f.submit "チャットを始める", :class => "btn btn-warning" %>
+      <% end %>
+    <% end %>
+  </div>
+  <% if @user.id == current_user.id%>
+    <div class="col-xs-6">
+        <h1>チャット一覧</h1>
+        <hr>
+        <% @entries.each do |e| %>
+        <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a></p>
+        <hr>
+        <% end %>
+      <a href="/rooms" class="btn btn-info">チャット一覧を見る</a>
+    </div>
+  <% end %>
+</div>
+<hr>
+<p><a href="/users" class="btn btn-primary">ユーザー一覧に戻る</a></p>

@@ -56,3 +56,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# for image uploader with AWS S3
+gem 'carrierwave'
+gem 'fog-aws'
+gem 'rmagick', '~> 2.16'

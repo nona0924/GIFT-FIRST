@@ -3,6 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         mount_uploader :image, ImageUploader
+         
+         has_many :messages
+         has_many :entries
          
   include JpPrefecture
   jp_prefecture :prefecture_code

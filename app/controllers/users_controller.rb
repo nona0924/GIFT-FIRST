@@ -4,6 +4,27 @@ class UsersController < ApplicationController
     
   def show
       @user = User.find(params[:id])
+    if @user.id == current_user.id
+      @entries = current_user.entries
+    else
+      @room = Room.new
+      @entry = Entry.new
+    end
+  end
+  
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      flash[:notice] = "アカウント登録しました"
+      redirect_to users_path
+    else
+      flash[:notice] = "アカウント登録できませんでした"
+      render 'devise/registrations/new'
+    end
   end
 
   def index
@@ -28,5 +49,11 @@ class UsersController < ApplicationController
       flash[:alert] = "無効なユーザー"
   end
   end
+  
+  private
+
+    def user_params
+      params.require(:user).permit(:email, :name, :user_type, :gender, :birtyday, :profile, :postcode, :prefecture_name, :address_city, :address_street, :address_building)
+    end
   
 end

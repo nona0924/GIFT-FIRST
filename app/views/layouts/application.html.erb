@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
          <li><a href="/users">ユーザー一覧</a></li>
-         <li><a href="/users/<%= current_user.id %>">ユーザー情報</a></li>
+         <li><a href="/users/<%= current_user.id %>"><%= current_user.name %>さん</a></li>
         <li><a href="/posts">投稿一覧</a></li>
         <li><a href="/posts/new">新しく投稿する</a></li>
         <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>

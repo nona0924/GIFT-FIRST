@@ -1,0 +1,11 @@
+<h2>チャット情報を編集する</h2>
+<hr>
+<%= form_for @room do |f| %>
+  <%= f.label :チャット名を変更する %>
+  <%= f.text_field :room_name, :class => "form-control my-form", :placeholder => "名前を入力して下さい" %>
+  <br>
+  <%= f.submit "変更する", :class => "btn btn-success" %>
+<% end %>
+<hr>
+<p><a href="/rooms/<%= @room.id %>" class="btn btn-primary">チャット情報に戻る</a></p>
+<p><a href="/" class="btn btn-info">トップに戻る</a></p>
