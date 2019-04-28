@@ -1,9 +1,22 @@
 <h1>投稿</h1>
 <hr>
+<% if @user.icon? %>
+    <%= image_tag @user.icon.to_s, class: 'mypage-article-img text-right' %>
+  <% end %>
 <p><%= @user.name %></p>
 <h4><%= @post.content %></h4>
-<p><%= @post.post_image%></p>
-<hr>
+<p><p><%= image_tag @post.post_image.to_s, class: 'mypage-article-img' %></p></p>
+<% if Like.find_by(user_id:current_user.id, post_id: @post.id) %>
+        <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+          <span class="fa fa-heart like-btn-unlike"></span>
+         <% end %>
+         
+<% else %>
+      
+        <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+        <span class="fa fa-heart like-btn"></span>
+        <% end %>
+<% end %>
 <p><a href="/posts" class="btn btn-info">トップに戻る</a></p>
 <% if user_signed_in? %>
 <% if @post.user_id == current_user.id %>

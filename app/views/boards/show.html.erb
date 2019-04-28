@@ -1,0 +1,36 @@
+<h2>掲示板詳細画面</h2>
+<% if @board.id == Lesson.find_by(board_id: params[:@board]) %>
+  <p>掲示板タイトル</p>
+　<%= @board.title %>
+　<p>レッスン概要</p>
+　<%= @board. overview %>
+　<p>開催場所住所</p>
+　<%= @board.address %>
+　<p>レッスンタイトル</p>
+　<%= @board1.title %>
+　<p>対象年齢</p>
+　<%= @board1.target_age %>
+　<p>開催日付</p>
+　<%= @board1.lesson_date %>
+　<p>開始時刻</p>
+　<%= @board1.start_time %>
+　<p>終了時刻</p>
+　<%= @board1.lesson_date %>
+　<p>画像</p>
+  <%= @board1.image %>
+<% else %>
+
+ <p>掲示板タイトル</p>
+　<%= @board.title %>
+　<p>品物の概要</p>
+　<%= @board.overview %>
+　<p>住所</p>
+　<%= @board.address %>
+　<p>ギフトの名前</p>
+　<%= @board2.gift_name %>
+　<p>品物の状態</p>
+　<%= @board2.status %>
+　<p>ギフト画像</p>
+  <%= @board2.image %>
+　
+<% end %>

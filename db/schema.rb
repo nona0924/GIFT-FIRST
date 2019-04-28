@@ -10,11 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190412165503) do
+ActiveRecord::Schema.define(version: 20190425091130) do
+
+  create_table "boards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "overview"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "board_id"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "entries", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "evaluated_user_id"
+    t.string   "message"
+    t.integer  "point"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "lesson_images", force: :cascade do |t|
+    t.integer  "lesson_id"
+    t.string   "lesson_image"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer  "board_id"
+    t.string   "title"
+    t.string   "target_age"
+    t.date     "lesson_date"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "image"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +85,22 @@ ActiveRecord::Schema.define(version: 20190412165503) do
     t.string   "post_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "present_images", force: :cascade do |t|
+    t.integer  "present_id"
+    t.string   "present_image"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "presents", force: :cascade do |t|
+    t.integer  "board_id"
+    t.string   "status"
+    t.string   "gift_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "image"
   end
 
   create_table "rooms", force: :cascade do |t|

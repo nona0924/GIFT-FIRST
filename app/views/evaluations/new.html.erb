@@ -1,0 +1,57 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">講師を評価する</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">評価一覧</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <%= form_for @eva do |f| %>
+
+<div class="col-md-6 col-md-offset-3">
+
+        <div class="field" id="star">
+            <%= f.label :star %>
+          </div>
+           
+          <%= f.hidden_field :evaluated_user_id, :value => @user_id %>
+
+         <%= f.text_area :message, :class => "form-control", :size => "50x20", :maxlength => 140 %><br>
+         <%= f.submit "レビュー評価", :class => "btn btn-primary" %>
+
+ </div>
+
+
+
+
+
+<% end %>
+
+<script>
+$('#star').raty({
+  size     : 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starhalf : '<%= asset_path('star-half.png') %>',
+  scoreName: 'evaluation[point]' 
+});
+</script>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <% @evas.each do |f| %>
+     <div class="container">
+     <p>評価ポイント：<%= f.point %></p> 
+     <p>コメント：<%= f.message %></p>
+     <hr>
+      <% end %>
+      </div>
+  </div>
+
+<script>
+$('#myTab a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>

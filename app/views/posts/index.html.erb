@@ -3,7 +3,7 @@
 <% @posts.each do |p| %>
   <p><a href="/users/<%= p.user_id%>"><%= User.find(p.user_id).name %></a></p>
   <h3><a href="/posts/<%= p.id %>"><%= p.content %></a></h3>
-  <p><%= p.post_image %></p>
+  <p><%= image_tag p.post_image.to_s, class: 'mypage-article-img' %></p>
   <hr>
   <% end %>
   <a href="/posts/new" class="btn btn-info">新しく投稿する</a>
