@@ -3,12 +3,14 @@ class BoardsController < ApplicationController
      before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
     
   def show
+    @type_flag = ""
     @board = Board.find(params[:id])
-    if @board.id == Lesson.find_by(board_id: params[:@board])
-      @board1 = Lesson.find_by(board_id: params[:@board])
+    if Lesson.find_by(board_id: @board.id)
+      @type_flag = "l"
     else
-      @board2 = Present.find_by(board_id: params[:@board])
-  end
+      @type_flag = "p"
+      logger.debug("======================== gift  = #{@board.id}")
+    end
 end
 
   def index
@@ -26,14 +28,14 @@ end
       @user = User.find(current_user.id)
     if @user.user_type == "講師"
       @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address).merge(:user_id => current_user.id))
-      @lesson = Lesson.create(params.require(:lesson).permit(:board_id, :title, :image, :target_age, :lesson_date, :start_time, :end_time).merge(:board_id => @board.id)) or  @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+      logger.debug("======================== Lesson  = #{@board.id}")
+      if params[:lesson][:title].present?
+        @lesson = Lesson.create(params.require(:lesson).permit(:board_id, :title, :image, :target_age, :lesson_date, :start_time, :end_time).merge(:board_id => @board.id))
+      else 
+        @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+      end
       flash[:notice] = "投稿を作成しました"
-      redirect_to("/boards/index")
-    elsif @user.user_type  "講師"
-     @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address).merge(:user_id => current_user.id))
-     @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
-     flash[:notice] = "投稿を作成しました"
-      redirect_to("/boards/index")
+      redirect_to("/boards")
    else
      @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address).merge(:user_id => current_user.id))
      @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))

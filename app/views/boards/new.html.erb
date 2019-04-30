@@ -1,104 +1,103 @@
- <% if @user.user_type == "講師" %>
- <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">レッスン掲示板作成</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ギフト掲示板作成</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <%= form_for @board do |f| %>
-<br>
-  <p>掲示板タイトル</p>
-　<%= f.text_field :title, :class => "form-control my-form" %>
-　<p>レッスン概要</p>
-　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
-　<p>開催場所住所</p>
-　<%= f.text_area :address, :class => "form-control my-form" %>
-　<%= fields_for @lesson do |l| %>
-　<p>レッスンタイトル</p>
-　<%= l.text_field :title, :class => "form-control my-form" %>
-　<p>対象年齢</p>
-　<%= l.text_field :target_age, :class => "form-control my-form" %>
-　<p>開催日付</p>
-　<%= l.date_field :lesson_date, :class => "form-control my-form" %>
-　<p>開始時刻</p>
-　<%= l.time_field :start_time, :class => "form-control my-form" %>
-　<p>終了時刻</p>
-　<%= l.time_field :lesson_date, :class => "form-control my-form" %>
-　<p>画像</p>
-  <%= l.file_field :image, :class => "form-control my-form" %>
-　<% end %>
-  <hr>
-  <%= f.submit "投稿する", :class => "btn btn-primary"  %>
-<% end %>
-<hr>
-<a href="/posts" class="btn btn-info">トップに戻る</a>
-
- <script>
-$('#myTab a').on('click', function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-</script>
-  </div>
+  <% if @user.user_type == "講師" %>
+ 
+   <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">レッスン掲示板作成</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ギフト掲示板作成</a>
+      </li>
+  </ul>
+    <div class="tab-content" id="myTabContent">
+      
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <%= form_for @board do |f| %><br>
+          <% logger.debug("================================== html レッスン") %>
+            <p>掲示板タイトル</p>
+          　<%= f.text_field :title, :class => "form-control my-form" %>
+          　<p>レッスン概要</p>
+          　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
+          　<p>開催場所住所</p>
+          　<%= f.text_area :address, :class => "form-control my-form" %>
+            　<%= fields_for @lesson do |l| %>
+                　<p>レッスンタイトル</p>
+                　<%= l.text_field :title, :class => "form-control my-form" %>
+                　<p>対象年齢</p>
+                　<%= l.text_field :target_age, :class => "form-control my-form" %>
+                　<p>開催日付</p>
+                　<%= l.date_field :lesson_date, :class => "form-control my-form" %>
+                　<p>開始時刻</p>
+                　<%= l.time_field :start_time, :class => "form-control my-form" %>
+                　<p>終了時刻</p>
+                　<%= l.time_field :lesson_date, :class => "form-control my-form" %>
+                　<p>画像</p>
+                  <%= l.file_field :image, :class => "form-control my-form" %>
+            　<% end %>
+             <hr>
+            <%= f.submit "投稿する", :class => "btn btn-primary"  %>
+          <% end %>
+          <hr>
+          <a href="/posts" class="btn btn-info">トップに戻る</a>
+      
+        </div>
   
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-     <%= form_for @board do |f| %>
-<br>
-  <p>掲示板タイトル</p>
-　<%= f.text_field :title, :class => "form-control my-form" %>
-　<p>品物の概要</p>
-　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
-　<p>住所</p>
-　<%= f.text_area :address, :class => "form-control my-form" %>
-　<%= fields_for @present do |p| %>
-　<p>ギフトの名前</p>
-　<%= p.text_field :gift_name, :class => "form-control my-form" %>
-　<p>品物の状態</p>
-　<%= p.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>
-　<p>ギフト画像</p>
-  <%= p.file_field :image, :class => "form-control my-form" %>
-　<% end %>
-  <hr>
-  <%= f.submit "投稿する", :class => "btn btn-primary"  %>
-<% end %>
-<hr>
-<a href="/posts" class="btn btn-info">トップに戻る</a>
- <script>
-$('#myTab a').on('click', function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-</script>
-  </div>
-</div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <%= form_for @board do |f| %><br>
+            <p>掲示板タイトル</p>
+          　<%= f.text_field :title, :class => "form-control my-form" %>
+          　<p>品物の概要</p>
+          　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
+          　<p>住所</p>
+          　<%= f.text_area :address, :class => "form-control my-form" %>
+            　<%= fields_for @present do |p| %>
+              　<p>ギフトの名前</p>
+              　<%= p.text_field :gift_name, :class => "form-control my-form" %>
+              　<p>品物の状態</p>
+              　<%= p.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>
+              　<p>ギフト画像</p>
+                <%= p.file_field :image, :class => "form-control my-form" %>
+        　     <% end %>
+            <hr>
+            <%= f.submit "投稿する", :class => "btn btn-primary"  %>
+          <% end %>
+         <hr>
+      
+      <a href="/posts" class="btn btn-info">トップに戻る</a>
+
+        </div>
+    </div>
 
 <% else %>
 
-   <%= form_for @board do |f| %>
-<br>
-  <p>掲示板タイトル</p>
-　<%= f.text_field :title, :class => "form-control my-form" %>
-　<p>品物の概要</p>
-　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
-　<p>住所</p>
-　<%= f.text_area :address, :class => "form-control my-form" %>
-　<%= fields_for @present do |p| %>
-　<p>ギフトの名前</p>
-　<%= p.text_field :gift_name, :class => "form-control my-form" %>
-　<p>品物の状態</p>
-　<%= p.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]],class:"form-control" %>
-　<br>
-　<p>ギフト画像</p>
-  <%= p.file_field :image, :class => "form-control my-form" %>
-　<% end %>
-  <hr>
-  <%= f.submit "投稿する", :class => "btn btn-primary"  %>
-<% end %>
-<hr>
-<a href="/posts" class="btn btn-info">トップに戻る</a>
+    <%= form_for @board do |f| %>
+      <br>
+        <p>掲示板タイトル</p>
+      　<%= f.text_field :title, :class => "form-control my-form" %>
+      　<p>品物の概要</p>
+      　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
+      　<p>住所</p>
+      　<%= f.text_area :address, :class => "form-control my-form" %>
+      　<%= fields_for @present do |p| %>
+          　<p>ギフトの名前</p>
+          　<%= p.text_field :gift_name, :class => "form-control my-form" %>
+          　<p>品物の状態</p>
+          　<%= p.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]],class:"form-control" %>
+          　<br>
+          　<p>ギフト画像</p>
+            <%= p.file_field :image, :class => "form-control my-form" %>
+　      <% end %>
+       <hr>
+       <%= f.submit "投稿する", :class => "btn btn-primary"  %>
+    <% end %>
+     <hr>
+    <a href="/posts" class="btn btn-info">トップに戻る</a>
+    
+    
+    <script>
+          $('#myTab a').on('click', function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+          })
+    </script>
 
 <% end %>

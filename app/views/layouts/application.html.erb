@@ -6,37 +6,43 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Anton rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body>
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+  
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Gift</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <a href="/" class="navbar-brand">Gift</a>
-    </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+      <div class="collapse navbar-collapse" id="navbarNav">
+      
+        <ul class="navbar-nav">
         <% if user_signed_in? %>
-         <li><a href="/users">ユーザー一覧</a></li>
-         <li><a href="/users/<%= current_user.id %>"><%= current_user.name %>さん</a></li>
-        <li><a href="/posts">投稿一覧</a></li>
-        <li><a href="/posts/new">新しく投稿する</a></li>
-        <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
+           <li class="nav-item active"><a href="/users">ユーザー一覧</a></li>
+           <li class="nav-item"><a href="/users/<%= current_user.id %>"><%= current_user.name %>さん</a></li>
+           <li class="nav-item"><a href="/posts">投稿一覧</a></li>
+           <li class="nav-item"><a href="/posts/new">新しく投稿する</a></li>
+           <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
         <% else %>
-        <li><a href="/users/sign_up">新規登録</a></li>
-        <li><a href="/users/sign_in">ログイン</a></li>
+           <li class="nav-item"><a href="/users/sign_up">新規登録</a></li>
+           <li class="nav-item"><a href="/users/sign_in">ログイン</a></li>
         <% end %>
       </ul>
+      
+
       </div>
-  </div>
-</nav>
+    </nav>
+  
+  
+  
+  
+  
+  
+   
     <div class="container main-page">
     <% if notice %>
     <br>
@@ -48,5 +54,8 @@
   <% end %>
     <%= yield %>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
