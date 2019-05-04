@@ -1,48 +1,91 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gift</title>
+    <title>&#127873;Gift</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Anton rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-
+  
+  <style>
+  body{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #c4c3ca;
+    background-color: #1f2029;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 4%;
+    overflow-x: hidden;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+  </style>
+  
   <body>
   
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Gift</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-      
-        <ul class="navbar-nav">
-        <% if user_signed_in? %>
-           <li class="nav-item active"><a href="/users">ユーザー一覧</a></li>
-           <li class="nav-item"><a href="/users/<%= current_user.id %>"><%= current_user.name %>さん</a></li>
-           <li class="nav-item"><a href="/posts">投稿一覧</a></li>
-           <li class="nav-item"><a href="/posts/new">新しく投稿する</a></li>
-           <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
-        <% else %>
-           <li class="nav-item"><a href="/users/sign_up">新規登録</a></li>
-           <li class="nav-item"><a href="/users/sign_in">ログイン</a></li>
-        <% end %>
-      </ul>
-      
+  <header class="cd-header">
+        <div class="header-wrapper">
+            <div class="logo-wrap">
+                <a href="/" class="hover-target"><span>GIFT</span>presents</a>
+            </div>
+            <div class="nav-but-wrap">
+                <div class="menu-icon hover-target">
+                    <span class="menu-icon__line menu-icon__line-left"></span>
+                    <span class="menu-icon__line"></span>
+                    <span class="menu-icon__line menu-icon__line-right"></span>
+                </div>                  
+            </div>                  
+        </div>              
+    </header>
 
-      </div>
-    </nav>
-  
-  
-  
-  
-  
-  
-   
+    <div class="nav">
+        <div class="nav__content">
+            <ul class="nav__list">
+                <!--<li class="nav__list-item active-nav"><a href="#" class="hover-target">Home</a></li> 保存用-->
+                <% if user_signed_in? %>
+           <li class="nav__list-item active-nav"><a href="/users" class="hover-target">ユーザー一覧</a></li>
+           <li class="nav__list-item"><a href="/users/<%= current_user.id %>" class="hover-target"><%= current_user.name %>さん</a></li>
+           <li class="nav__list-item"><a class="dropdown-item" href="/boards/new">掲示板を作成する</a></li>
+           <li class="nav__list-item"><a class="dropdown-item" href="/boards">掲示板一覧をみる</a></li>
+           <li class="nav__list-item"><a class="dropdown-item" href="/posts">投稿一覧</a></li>
+           <li class="nav__list-item" class="hover-target"><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
+        <% else %>
+        　 <li class="nav__list-item active-nav"><a href="/" class="hover-target">HOMEに戻る</a></li>
+           <li class="nav__list-item"><a href="/posts" class="hover-target">投稿一覧</a></li>
+           <li class="nav__list-item"><a href="/boards" class="hover-target">掲示板一覧をみる</a></li>
+           <li class="nav__list-item"><a href="/users/sign_up" class="hover-target">新規登録</a></li>
+           <li class="nav__list-item"><a href="/users/sign_in" class="hover-target">ログイン</a></li>
+        <% end %>
+            </ul>
+        </div>
+    </div>      
+
+    <div class="section full-height over-hide"> 
+        <div class="switch-wrap">
+            <h1>background chenge</h1>
+            <div id="switch" class="hover-target">
+                <div id="circle"></div>
+            </div>
+            <p><span>dark</span> - <span>light</span></p>
+        </div>
+    </div>  
+    
+    <div class='cursor' id="cursor"></div>
+    <div class='cursor2' id="cursor2"></div>
+    <div class='cursor3' id="cursor3"></div>
+
+<!-- Link to page
+================================================== -->
+
+
     <div class="container main-page">
     <% if notice %>
     <br>
@@ -57,5 +100,78 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+    <script>
+    
+    (function($) { "use strict";
+        
+    //Page cursors
+
+    document.getElementsByTagName("body")[0].addEventListener("mousemove", function(n) {
+        t.style.left = n.clientX + "px", 
+        t.style.top = n.clientY + "px", 
+        e.style.left = n.clientX + "px", 
+        e.style.top = n.clientY + "px", 
+        i.style.left = n.clientX + "px", 
+        i.style.top = n.clientY + "px"
+    });
+    var t = document.getElementById("cursor"),
+        e = document.getElementById("cursor2"),
+        i = document.getElementById("cursor3");
+    function n(t) {
+        e.classList.add("hover"), i.classList.add("hover")
+    }
+    function s(t) {
+        e.classList.remove("hover"), i.classList.remove("hover")
+    }
+    s();
+    for (var r = document.querySelectorAll(".hover-target"), a = r.length - 1; a >= 0; a--) {
+        o(r[a])
+    }
+    function o(t) {
+        t.addEventListener("mouseover", n), t.addEventListener("mouseout", s)
+    }
+    
+    //Navigation
+
+    var app = function () {
+        var body = undefined;
+        var menu = undefined;
+        var menuItems = undefined;
+        var init = function init() {
+            body = document.querySelector('body');
+            menu = document.querySelector('.menu-icon');
+            menuItems = document.querySelectorAll('.nav__list-item');
+            applyListeners();
+        };
+        var applyListeners = function applyListeners() {
+            menu.addEventListener('click', function () {
+                return toggleClass(body, 'nav-active');
+            });
+        };
+        var toggleClass = function toggleClass(element, stringClass) {
+            if (element.classList.contains(stringClass)) element.classList.remove(stringClass);else element.classList.add(stringClass);
+        };
+        init();
+    }();
+
+    
+    //Switch light/dark
+    
+    $("#switch").on('click', function () {
+        if ($("body").hasClass("light")) {
+            $("body").removeClass("light");
+            $("#switch").removeClass("switched");
+        }
+        else {
+            $("body").addClass("light");
+            $("#switch").addClass("switched");
+        }
+    });          
+              
+})(jQuery); 
+    
+    </script>
   </body>
 </html>

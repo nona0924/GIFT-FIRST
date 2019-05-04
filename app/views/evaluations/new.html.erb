@@ -1,14 +1,78 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">講師を評価する</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">評価一覧</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <%= form_for @eva do |f| %>
+<style>
+  *, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_tab {
+	display: block;
+	display: -webkit-flex;
+	display:         flex;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	margin: 1em auto;
+	overflow: hidden;
+}
+.cp_tab input[type='radio'] {
+	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+	cursor: pointer;
+	-webkit-appearance: none;
+	        appearance: none;
+	display: block;
+	width: 100%;
+	outline: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+.cp_tab .cp_tabpanels label {
+	cursor: pointer;
+	display: block;
+	line-height: 1em;
+	padding: 2rem 0;
+	text-align: center;
+}
+.cp_tab [type="radio"]:hover,
+.cp_tab [type='radio']:focus {
+	border-bottom: 1px solid #fd264f;
+}
+.cp_tab [type='radio']:checked {
+	border-bottom: 2px solid #fd264f;
+}
+.cp_tab [type='radio']:checked + .cp_tabpanel {
+	opacity: 1;
+}
+.cp_tab [type='radio'] + .cp_tabpanel {
+	display: block;
+	opacity: 0;
+	padding: 2rem 0;
+	width: 90%;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+.cp_tab .cp_tabpanels {
+	width: 50%;
+}
+.cp_tab .cp_tabpanels [type='radio'] + .cp_tabpanel {
+	width: 200%;
+	margin-left: 200%;
+}
+.cp_tab .cp_tabpanels [type='radio']:checked + .cp_tabpanel {
+	margin-left: 0;
+}
+.cp_tab .cp_tabpanels:last-child [type='radio'] + .cp_tabpanel {
+	margin-left: 100%;
+}
+.cp_tab .cp_tabpanels:last-child [type='radio']:checked + .cp_tabpanel {
+	margin-left: -100%;
+}
+  </style>
+  
+
+<div class="cp_tab">
+	<div class="cp_tabpanels">
+		<label for="tab5_1">講師を評価する</label>
+		<input id="tab5_1" name="cp_tab" type="radio" checked="checked">
+		<div class="cp_tabpanel">
+			<%= form_for @eva do |f| %>
 
 <div class="col-md-6 col-md-offset-3">
 
@@ -23,35 +87,33 @@
 
  </div>
 
-
-
-
-
 <% end %>
 
-<script>
-$('#star').raty({
-  size     : 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  starhalf : '<%= asset_path('star-half.png') %>',
-  scoreName: 'evaluation[point]' 
-});
-</script>
-  </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <% @evas.each do |f| %>
-     <div class="container">
-     <p>評価ポイント：<%= f.point %></p> 
-     <p>コメント：<%= f.message %></p>
-     <hr>
-      <% end %>
-      </div>
-  </div>
-
-<script>
-$('#myTab a').on('click', function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-</script>
+          <script>
+          $('#star').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starhalf : '<%= asset_path('star-half.png') %>',
+            scoreName: 'evaluation[point]' 
+          });
+          </script>
+		</div>
+ </div>
+ 
+ 
+	<div class="cp_tabpanels">
+		<label for="tab5_2">評価一覧</label>
+		<input id="tab5_2" name="cp_tab" type="radio">
+  		<div class="cp_tabpanel">
+  		  <div class="col-md-6 col-md-offset-3">
+      			<% @evas.each do |f| %>
+           <div class="container">
+           <p>評価ポイント：<%= f.point %></p> 
+           <p>コメント：<%= f.message %></p>
+           <hr>
+            <% end %>
+       </div>
+		</div>
+	</div>
+</div>

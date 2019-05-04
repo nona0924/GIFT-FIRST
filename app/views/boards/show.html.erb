@@ -2,22 +2,26 @@
 <% if @type_flag == "l" %>
   <p>掲示板タイトル</p>
 　<%= @board.title %>
+　<p>カテゴリー</p>
+　<%= @board.category%>
 　<p>レッスン概要</p>
 　<%= @board. overview %>
 　<p>開催場所住所</p>
 　<%= @board.address %>
+　<!--ここからレッスンモデル-->
 　<p>レッスンタイトル</p>
-　<%= @board.title %>
+　<%= Lesson.find_by(board_id: @board.id).title %>
 　<p>対象年齢</p>
-　<%= @board.target_age %>
+　<%= Lesson.find_by(board_id: @board.id).target_age %>
 　<p>開催日付</p>
-　<%= @board.lesson_date %>
+　<%= Lesson.find_by(board_id: @board.id).lesson_date %>
 　<p>開始時刻</p>
-　<%= @board.start_time %>
+　<%= Lesson.find_by(board_id: @board.id).start_time %>
 　<p>終了時刻</p>
-　<%= @board.lesson_date %>
+　<%= Lesson.find_by(board_id: @board.id).end_time %>
 　<p>画像</p>
-  <%= @board.image %>
+  <%= Lesson.find_by(board_id: @board.id).image %>
+  <!--< image_tag Present.find_by(board_id: @board.id).image %>-->
 <% else %>
 
  <p>掲示板タイトル</p>

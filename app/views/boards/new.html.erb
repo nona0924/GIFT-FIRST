@@ -1,17 +1,79 @@
+  <style>
+  *, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_tab {
+	display: block;
+	display: -webkit-flex;
+	display:         flex;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	margin: 1em auto;
+	overflow: hidden;
+}
+.cp_tab input[type='radio'] {
+	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+	cursor: pointer;
+	-webkit-appearance: none;
+	        appearance: none;
+	display: block;
+	width: 100%;
+	outline: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+.cp_tab .cp_tabpanels label {
+	cursor: pointer;
+	display: block;
+	line-height: 1em;
+	padding: 2rem 0;
+	text-align: center;
+}
+.cp_tab [type="radio"]:hover,
+.cp_tab [type='radio']:focus {
+	border-bottom: 1px solid #fd264f;
+}
+.cp_tab [type='radio']:checked {
+	border-bottom: 2px solid #fd264f;
+}
+.cp_tab [type='radio']:checked + .cp_tabpanel {
+	opacity: 1;
+}
+.cp_tab [type='radio'] + .cp_tabpanel {
+	display: block;
+	opacity: 0;
+	padding: 2rem 0;
+	width: 90%;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+.cp_tab .cp_tabpanels {
+	width: 50%;
+}
+.cp_tab .cp_tabpanels [type='radio'] + .cp_tabpanel {
+	width: 200%;
+	margin-left: 200%;
+}
+.cp_tab .cp_tabpanels [type='radio']:checked + .cp_tabpanel {
+	margin-left: 0;
+}
+.cp_tab .cp_tabpanels:last-child [type='radio'] + .cp_tabpanel {
+	margin-left: 100%;
+}
+.cp_tab .cp_tabpanels:last-child [type='radio']:checked + .cp_tabpanel {
+	margin-left: -100%;
+}
+  </style>
+  
   <% if @user.user_type == "講師" %>
- 
-   <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">レッスン掲示板作成</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ギフト掲示板作成</a>
-      </li>
-  </ul>
-    <div class="tab-content" id="myTabContent">
-      
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <%= form_for @board do |f| %><br>
+  
+  <div class="cp_tab">
+	<div class="cp_tabpanels">
+		<label for="tab5_1">レッスン掲示板作成</label>
+		<input id="tab5_1" name="cp_tab" type="radio" checked="checked">
+		<div class="cp_tabpanel">
+			 <%= form_for @board do |f| %><br>
           <% logger.debug("================================== html レッスン") %>
             <p>掲示板タイトル</p>
           　<%= f.text_field :title, :class => "form-control my-form" %>
@@ -19,6 +81,8 @@
           　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
           　<p>開催場所住所</p>
           　<%= f.text_area :address, :class => "form-control my-form" %>
+          　<p>カテゴリーを選択</p>
+          　<%= f.select :category, [["スポーツ系", "スポーツ系"], ["武道系", "武道系"], ["学習系", "学習系"], ["芸術系", "芸術系"], ["音楽系", "音楽系"], ["料理系", "料理系"]] ,class:"form-control" %>
             　<%= fields_for @lesson do |l| %>
                 　<p>レッスンタイトル</p>
                 　<%= l.text_field :title, :class => "form-control my-form" %>
@@ -38,17 +102,24 @@
           <% end %>
           <hr>
           <a href="/posts" class="btn btn-info">トップに戻る</a>
-      
-        </div>
-  
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <%= form_for @board do |f| %><br>
+		</div>
+	</div>
+	
+	
+	<div class="cp_tabpanels">
+		<label for="tab5_2">ギフト掲示板作成</label>
+		<input id="tab5_2" name="cp_tab" type="radio">
+		<div class="cp_tabpanel">
+			<%= form_for @board do |f| %><br>
             <p>掲示板タイトル</p>
           　<%= f.text_field :title, :class => "form-control my-form" %>
           　<p>品物の概要</p>
           　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
           　<p>住所</p>
           　<%= f.text_area :address, :class => "form-control my-form" %>
+          　
+          　<%= f.hidden_field :category, :value => "プレゼント" %>
+          　
             　<%= fields_for @present do |p| %>
               　<p>ギフトの名前</p>
               　<%= p.text_field :gift_name, :class => "form-control my-form" %>
@@ -63,10 +134,11 @@
          <hr>
       
       <a href="/posts" class="btn btn-info">トップに戻る</a>
-
-        </div>
-    </div>
-
+      
+		</div>
+	</div>
+</div>
+ 
 <% else %>
 
     <%= form_for @board do |f| %>
@@ -77,6 +149,9 @@
       　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
       　<p>住所</p>
       　<%= f.text_area :address, :class => "form-control my-form" %>
+      　
+      　<%= f.hidden_field :category, :value => "プレゼント" %>
+      　
       　<%= fields_for @present do |p| %>
           　<p>ギフトの名前</p>
           　<%= p.text_field :gift_name, :class => "form-control my-form" %>
@@ -92,12 +167,5 @@
      <hr>
     <a href="/posts" class="btn btn-info">トップに戻る</a>
     
-    
-    <script>
-          $('#myTab a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
-    </script>
 
 <% end %>
