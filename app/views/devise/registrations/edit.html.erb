@@ -1,3 +1,26 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+h2 {
+  font-size:25px;
+}
+</style>
+
 <h2>ユーザー編集</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -39,12 +62,14 @@
   </div>
   <br>
   <div class="actions">
-    <%= f.submit "変更完了", :class => "btn btn-primary" %>
+    <%= f.submit "変更完了", :class => "button-second" %>
   </div>
 <% end %>
 <br>
-<h3>アカウントを削除する</h3>
+<h2>アカウントを削除する</h2>
 <p>アカウントを削除をしたらアプリを使えなくなりますが、それでもよろしいですか？</p>
-<p><%= button_to "アカウントを削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "btn btn-info" %></p>
+<br>
+<p><%= button_to "アカウントを削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "button-second" %></p>
 
-<%= link_to "前のページに戻る", :back, :class => "btn btn-success" %>
+<%= link_to "前のページに戻る", :back, :class => "button-second" %>
+<br><br>

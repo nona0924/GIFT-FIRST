@@ -5,23 +5,34 @@ class BoardsController < ApplicationController
   def show
     @type_flag = ""
     @board = Board.find(params[:id])
-    if Lesson.find_by(board_id: @board.id)
-      @type_flag = "l"
+    if @board.category == "プレゼント"
+        @type_flag = "p"
+        @present = Present.where(board_id: @board.id)
     else
-      @type_flag = "p"
+      @type_flag = "l"
       logger.debug("======================== gift  = #{@board.id}")
     end
 end
 
   def index
-      @boards = Board.all
-  end
+      @boards = Board.all.order(created_at: :desc)
+      @search = Board.ransack(params[:q])
+      @products = @search.result
+      
+      # @search1 = Present.ransack(params[:p], search_key: :p)
+      # @products1 = @search1.result
+
+      # @search2 = Lesson.ransack(params[:w], search_key: :w)
+      # @products2 = @search2.result
+    end
+  
 
   def new
       @board = Board.new
       @lesson = Lesson.new
       @present = Present.new
       @user = User.find(current_user.id)
+      logger.debug("======================== gift  = #{@board.id}")
   end
   
   def create

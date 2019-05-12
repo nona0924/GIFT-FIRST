@@ -1,26 +1,128 @@
-<h1>投稿</h1>
-<hr>
-<% if @user.icon? %>
-    <%= image_tag @user.icon.to_s, class: 'mypage-article-img text-right' %>
-  <% end %>
-<p><%= @user.name %></p>
-<h4><%= @post.content %></h4>
-<p><p><%= image_tag @post.post_image.to_s, class: 'mypage-article-img' %></p></p>
-<% if Like.find_by(user_id:current_user.id, post_id: @post.id) %>
+<style>
+
+.posts-show form {
+  display: inline;
+}
+
+.posts-show-item {
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+}
+
+.posts-show-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 40%;
+  box-shadow: 0 2px 6px #c1ced7;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+.posts-show-item .post-user-name a {
+  vertical-align: middle;
+  font-size: 24px;
+  margin-left: 15px;
+}
+
+.posts-show-item p {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.post-time {
+  color: #8899a6;
+  margin-bottom: 10px;
+}
+
+
+.like-btn {
+  color: #8899a6;
+}
+
+.like-btn-unlike {
+  color: #ff2581;
+}
+
+
+.posts-show-item .fa {
+  font-size: 16px;
+  margin-right: 3px;
+}
+
+.post-menus {
+  float: right;
+}
+
+.post-menus a, .post-menus input {
+  color: #8899a6;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.posts-show-item .photo-first {
+    width:120px;
+    height:120px;
+     border-radius: 1%;
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+</style>
+
+
+<div class="main posts-show">
+    <div class="posts-show-item">
+      <div class="post-user-name">
+        <% if @user.icon? %>
+         <%= image_tag @user.icon.to_s %>
+        <% else %>
+          <img src="<%= "/assets/image6.jpg"%>" class="profile">
+        <% end %>
+       <%= @user.name %>
+      </div>
+      <p>
+        <%= @post.content %>
+      </p>
+      <% if @post.post_image.blank? %>
+      <% else %>
+      <%= image_tag @post.post_image.to_s, class: "photo-first" %>
+      <% end %>
+      <div class="post-time">
+        <%= @post.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+      </div>
+      
+      <% if Like.find_by(user_id:current_user.id, post_id: @post.id) %>
         <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
           <span class="fa fa-heart like-btn-unlike"></span>
          <% end %>
          
-<% else %>
+      <% else %>
       
         <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
         <span class="fa fa-heart like-btn"></span>
         <% end %>
-<% end %>
-<p><a href="/posts" class="btn btn-info">トップに戻る</a></p>
-<% if user_signed_in? %>
-<% if @post.user_id == current_user.id %>
-<p><a href="/posts/<%= @post.id %>/edit" class="btn btn-success">投稿を編集する</a></p>
-<p><a href="/posts/<%= @post.id %>" data-method="delete" class="btn btn-danger">投稿を削除する</a></p>
-<% end %>
-<% end %>
+        <% end %>
+      
+      <%= @likes_count %>
+
+      <% if @post.user_id == current_user.id %>
+        <div class="post-menus">
+          <%= link_to("編集", "/posts/#{@post.id}/edit") %>
+          <a href="/posts/<%= @post.id %>" data-method="delete">削除する</a>
+        </div>
+      <% end %>
+    </div>
+</div>
+<br>
+<a href="/posts" class="button-second ">投稿一覧ページに戻る</a>

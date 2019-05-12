@@ -1,8 +1,43 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.room-name {
+ border: solid 4px #fd7b1b;
+ overflow: scroll;
+ height:300px;
+ font-size: 22px;
+ padding:20px;
+}
+
+.room-name a {
+  color:gray;
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+</style>
+
 <h1>チャット一覧</h1>
-<hr>
+<br>
+<div class="room-name">
 <% @entries.each do |e| %>
- <a href="/rooms/<%= e.room_id %>"><%= e.room.room_name %></a>
-  <hr>
+  <a href="/rooms/<%= e.room_id %>"><%= e.room.room_name %></a>
+  <br>
 <% end %>
-<p><a href="/users/<%= current_user.id %>" class="btn btn-primary"><%= current_user.name %>のページに戻る</a></p>
-<p><a href="/" class="btn btn-info">トップに戻る</a></p>
+</div>
+<br>
+<p><a href="/users/<%= current_user.id %>" class="button-second"><%= current_user.name %>のページに戻る</a></p>
+<br>
+<p><a href="/" class="button-second">トップに戻る</a></p>

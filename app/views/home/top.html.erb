@@ -2,7 +2,10 @@
       <div class="cover text-white text-center">
         <h1 class="header-content">Gift</h1>
         <p class="header-second">教えたいと教わりたいを未来へつなぐ</p>
+        <% if current_user %>
+        <% else %>
         <a href="/users/sign_up"class="btn-circle-border-double">新規登録をする</a>
+        <% end %>
       </div>
 </deader>
 

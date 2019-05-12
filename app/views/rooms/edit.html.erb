@@ -1,11 +1,48 @@
+<style>
+  body {
+  font-family: 'Bluesky';
+}
+
+.form-control {
+  width:800px;
+  height:50px;
+}
+
+.chat-name {
+  font-size:20px;
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+/*.second {*/
+/*  background: linear-gradient(45deg, #05FBFF, #1D62F0 );*/
+/*}*/
+
+/*.third {*/
+/*  background: linear-gradient(90deg, #d53369, #cbad6d);*/
+/*}*/
+</style>
+
 <h2>チャット情報を編集する</h2>
-<hr>
+<br>
 <%= form_for @room do |f| %>
-  <%= f.label :チャット名を変更する %>
-  <%= f.text_field :room_name, :class => "form-control my-form", :placeholder => "名前を入力して下さい" %>
+  <%= f.label :チャット名を変更する, :class => "chat-name" %>
+  <%= f.text_field :room_name, :class => "form-control", :placeholder => "名前を入力して下さい" %>
   <br>
-  <%= f.submit "変更する", :class => "btn btn-success" %>
+  <%= f.submit "変更する", :class => "button-second" %>
 <% end %>
 <hr>
-<p><a href="/rooms/<%= @room.id %>" class="btn btn-primary">チャット情報に戻る</a></p>
-<p><a href="/" class="btn btn-info">トップに戻る</a></p>
+<br>
+<p><a href="/rooms/<%= @room.id %>" class="button-second">チャット情報に戻る</a></p>
+<br>
+<p><a href="/" class="button-second">トップに戻る</a></p>

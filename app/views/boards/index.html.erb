@@ -1,8 +1,215 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+
+.balloon6 {
+ overflow: scroll;
+ height:450px;
+ font-size: 22px;
+ padding:20px;
+ margin-bottom: 20px;
+}
+
+.posts-heading {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+.room-name {
+ /*border: solid 4px gray;*/
+ overflow: scroll;
+ height:400px;
+ font-size: 15px;
+ padding:20px;
+ background-color: #ffffffe6;
+ margin-bottom: 15px;
+}
+
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_tab {
+	display: block;
+	display: -webkit-flex;
+	display:         flex;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	margin: 1em auto;
+	overflow: hidden;
+}
+.cp_tab input[type='radio'] {
+	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+	cursor: pointer;
+	-webkit-appearance: none;
+	        appearance: none;
+	display: block;
+	width: 100%;
+	outline: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+.cp_tab .cp_tabpanels label {
+	cursor: pointer;
+	display: block;
+	line-height: 1em;
+	padding: 2rem 0;
+	text-align: center;
+}
+.cp_tab [type="radio"]:hover,
+.cp_tab [type='radio']:focus {
+	border-bottom: 1px solid #fd264f;
+}
+.cp_tab [type='radio']:checked {
+	border-bottom: 2px solid #fd264f;
+}
+.cp_tab [type='radio']:checked + .cp_tabpanel {
+	opacity: 1;
+}
+.cp_tab [type='radio'] + .cp_tabpanel {
+	display: block;
+	opacity: 0;
+	padding: 2rem 0;
+	width: 90%;
+	-webkit-transition: all 0.3s ease-in-out;
+	        transition: all 0.3s ease-in-out;
+}
+.cp_tab .cp_tabpanels {
+	width: 50%;
+}
+.cp_tab .cp_tabpanels [type='radio'] + .cp_tabpanel {
+	width: 200%;
+	margin-left: 200%;
+}
+.cp_tab .cp_tabpanels [type='radio']:checked + .cp_tabpanel {
+	margin-left: 0;
+}
+.cp_tab .cp_tabpanels:last-child [type='radio'] + .cp_tabpanel {
+	margin-left: 100%;
+}
+.cp_tab .cp_tabpanels:last-child [type='radio']:checked + .cp_tabpanel {
+	margin-left: -100%;
+}
+
+
+</style>
+
+
 <h1>掲示板一覧</h1>
-<hr>
-<% @boards.each do |e| %>
- <a href="/boards/<%= e.id %>"><%= e.title %></a>
-  <hr>
+<br>
+
+<div class="cp_tab">
+	<div class="cp_tabpanels">
+		<label for="tab5_1">レッスン掲示板</label>
+		<input id="tab5_1" name="cp_tab" type="radio" checked="checked">
+		<div class="cp_tabpanel">
+		    
+<p>検索</p>
+<%= search_form_for @search do |f| %>
+    <%= f.label :title_cont, "掲示板 名前" %>
+    <%= f.text_field :title_cont, class: "form-control" %>
+    <%= f.label :address_cont, "レッスン開催地" %>
+    <%= f.text_field :address_cont, class: "form-control" %>
+    <%= f.label :category_eq, "カテゴリー" %>
+    <%= f.select :category_eq, [["選択してください", ""], ["スポーツ系", "スポーツ系"], ["武道系", "武道系"], ["学習系", "学習系"], ["芸術系", "芸術系"], ["音楽系", "音楽系"], ["料理系", "料理系"]], class: "form-control" %>
+    <%= f.submit "Search" %>
 <% end %>
-<p><a href="/users/<%= current_user.id %>" class="btn btn-primary"><%= current_user.name %>のページに戻る</a></p>
-<p><a href="/" class="btn btn-info">トップに戻る</a></p>
+<hr>
+
+
+<div class="room-name">
+    <% if @products.blank?%>
+        <% @boards.each do |e| %>
+          <div class="posts-heading">
+             <a href="/boards/<%= e.id %>"><%= e.title %></a>
+             <br>
+             <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
+           </div>
+        <% end %><br>
+<% else%>
+     <% @products.each do |e| %>
+       <div class="posts-heading">
+         <a href="/boards/<%= e.id %>"><%= e.title %></a>
+         <br>
+         <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
+       </div><br>
+<% end %>
+<% end %>
+</div>
+
+
+<p><a href="/users/<%= current_user.id %>" class="button-second"><%= current_user.name %>のページに戻る</a></p>
+<br>
+<p><a href="/" class="button-second">トップに戻る</a></p>
+<br>
+		　
+		</div>
+	</div>
+	
+	
+	<div class="cp_tabpanels">
+		<label for="tab5_2">ギフト掲示板</label>
+		<input id="tab5_2" name="cp_tab" type="radio">
+		<div class="cp_tabpanel">
+			<p>検索</p>
+<%= search_form_for @search do |f| %>
+    <%= f.label :title_cont, "掲示板 名前" %>
+    <%= f.text_field :title_cont, class: "form-control" %>
+    <%= f.label :address_cont, "エリア" %>
+    <%= f.text_field :address_cont, class: "form-control" %>
+    <%= f.label :category_eq, "カテゴリー" %>
+    <%= f.select :category_eq, [["選択してください", ""], ["プレゼント", "プレゼント"]], class: "form-control" %>
+    <%= f.search_field :presents_status_cont %>
+    <%= f.label :status, "品物の状態" %>
+    <%= f.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>
+              
+    <%= f.submit "Search" %>
+<% end %>
+<hr>
+
+
+<div class="room-name">
+    <% if @products.blank?%>
+        <% @boards.each do |e| %>
+          <div class="posts-heading">
+             <a href="/boards/<%= e.id %>"><%= e.title %></a>
+             <br>
+             <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
+           </div>
+        <% end %><br>
+<% else%>
+     <% @products.each do |e| %>
+       <div class="posts-heading">
+         <a href="/boards/<%= e.id %>"><%= e.title %></a>
+         <br>
+         <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
+       </div><br>
+<% end %>
+<% end %>
+</div>
+
+
+<p><a href="/users/<%= current_user.id %>" class="button-second"><%= current_user.name %>のページに戻る</a></p>
+<br>
+<p><a href="/" class="button-second">トップに戻る</a></p>
+<br>
+		</div>
+	</div>
+</div>

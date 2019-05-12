@@ -1,41 +1,92 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.room-name {
+ border: solid 4px #fd7b1b;
+ overflow: scroll;
+ height:300px;
+ font-size: 22px;
+ padding:20px;
+}
+
+.room-name a {
+  color:gray;
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+img{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+</style>
+
+
 <div class="row">
   <div class="col-xs-6">
 <h1>ユーザー情報</h1>
-<hr>
+<br>
+<div class="profile">
 <% if @user.icon? %>
-    <%= image_tag @user.icon.to_s, class: 'mypage-article-img' %>
+   <div class="faceicon">
+     <%= image_tag @user.icon.to_s %>
+     </div>
+    <% else %>
+    <img src="<%= "/assets/image6.jpg"%>">
   <% end %>
 <br>
 <p>名前：<%= @user.name %>さん</p>
 <p>ユーザータイプ：<%= @user.user_type%></p>
 <p>自己紹介：<%= @user.profile %></p>
-<hr>
+<br>
+</div>
 <% if @user.id == current_user.id %>
-<p><a href="/users/edit" class="btn btn-success">ユーザー情報を編集する</a>
+<p><a href="/users/edit" class="button-second">ユーザー情報を編集する</a>
 <% else %>
       <%= form_for @room do |f| %>
        <%= fields_for @entry do |e| %>
         <%= e.hidden_field :user_id, :value => @user.id %>
       <% end %>
-        <%= f.submit "チャットを始める", :class => "btn btn-warning" %>
+        <%= f.submit "チャットを始める", :class => "button-second" %>
       <% end %>
       <br>
     <% if @user.user_type == "講師" %>
-    <%= link_to "講師を評価する", "/evaluations/new/#{@user.id}", :class => "btn btn-primary" %>
+    <%= link_to "講師を評価する", "/evaluations/new/#{@user.id}", :class => "button-second" %>
     <% end %>
     <% end %>
   </div>
   <% if @user.id == current_user.id%>
     <div class="col-xs-6">
         <h1>チャット一覧</h1>
-        <hr>
+        <br>
+        <div class="room-name">
         <% @entries.each do |e| %>
         <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a></p>
         <hr>
         <% end %>
-      <a href="/rooms" class="btn btn-info">チャット一覧を見る</a>
+        </div>
+        <br>
+      <a href="/rooms" class="button-second">チャット一覧を見る</a>
+      <br><br>
+      <p><a href="/posts/new" class="button-second">近況を投稿する</a></p>
     </div>
   <% end %>
 </div>
-<hr>
-<p><a href="/users" class="btn btn-primary">ユーザー一覧に戻る</a></p>
+<br>
+<p><a href="/users" class="button-second">ユーザー一覧に戻る</a></p>
+<br>

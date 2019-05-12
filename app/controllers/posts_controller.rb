@@ -5,10 +5,13 @@ class PostsController < ApplicationController
   def show
       @post = Post.find(params[:id])
       @user = User.find(@post.user_id)
+      @likes_count = Like.where(post_id: @post.id).count
   end
 
   def index
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
+      @user = User.find_by(id: params[:user_id])
+      @users = User.find_by(icon: params[:@user])
   end
 
   def new

@@ -1,7 +1,56 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+/*.profile {*/
+/*    border-bottom: solid 2px #fd7b1b;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.balloon6 {
+ overflow: scroll;
+ height:450px;
+ font-size: 22px;
+ padding:20px;
+ margin-bottom: 20px;
+}
+
+</style>
+
 <h1>ユーザー一覧</h1>
-<hr>
-<% @users.each do |u| %>
-  <p><a href="/users/<%= u.id %>"><%= u.name %>さん</a></p>
-  <hr>
-<% end %>
-<a href="/posts" class="btn btn-info">トップに戻る</a>
+<br>
+    <div class="balloon6">
+     <% @users.each do |u| %>
+        <% if u.icon? %>
+           <div class="faceicon">
+             <%= image_tag u.icon.to_s %>
+             </div>
+            <% else %>
+            <img src="<%= "/assets/image6.jpg"%>">
+          <% end %>
+                 <p><a href="/users/<%= u.id %>"><%= u.name %>さん</a></p>
+          <br>
+        <% end %>
+    </div>
+<a href="/posts" class="button-second">トップに戻る</a>
+<br>

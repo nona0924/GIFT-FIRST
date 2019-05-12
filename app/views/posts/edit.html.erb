@@ -1,12 +1,30 @@
+<style>
+body {
+  font-family: 'Bluesky';
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+</style>
+
 <h1>投稿を編集する</h1>
-<hr>
+<br>
 <%= form_for @post do |f| %>
 <p>内容</p>
 　<%= f.text_area :content, :class => "form-control my-form" %>
   <p>画像</p>
   <%= f.file_field :post_image, :class => "form-control my-form" %>
-  <hr>
-  <%= f.submit "変更する", :class => "btn btn-primary" %>
+  <br>
+  <%= f.submit "変更する", :class => "button-second" %>
 <% end %>
-<hr>
-<a href="/posts/<%= @post.id %>" class="btn btn-info" >投稿に戻る</a>
+<br>
+<a href="/posts/<%= @post.id %>" class="button-second" >投稿に戻る</a>

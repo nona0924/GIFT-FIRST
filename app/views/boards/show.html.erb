@@ -19,8 +19,7 @@
 　<%= Lesson.find_by(board_id: @board.id).start_time %>
 　<p>終了時刻</p>
 　<%= Lesson.find_by(board_id: @board.id).end_time %>
-　<p>画像</p>
-  <%= Lesson.find_by(board_id: @board.id).image %>
+  
   <!--< image_tag Present.find_by(board_id: @board.id).image %>-->
 <% else %>
 
@@ -34,7 +33,8 @@
 　<%= Present.find_by(board_id: @board.id).gift_name %>
 　<p>品物の状態</p>
 　<%= Present.find_by(board_id: @board.id).status %>
-　<p>ギフト画像</p>
-  <%= Present.find_by(board_id: @board.id).image %>
+
+ 　<!--<p>ギフト画像</p>-->
+  <!-- < image_tag @present.image.to_s %>-->
 　
 <% end %>
