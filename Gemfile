@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.0'
+ruby '2.6.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
 # Use sqlite3 as the database for Active Record
@@ -28,9 +28,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'therubyracer'
-gem 'less-rails'
+gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
-gem 'sprockets', '3.6.3'
+gem 'sprockets'
 gem 'devise'
 gem 'execjs'
 
