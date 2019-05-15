@@ -17,13 +17,7 @@ body {
 }
 
 
-.balloon6 {
- overflow: scroll;
- height:450px;
- font-size: 22px;
- padding:20px;
- margin-bottom: 20px;
-}
+
 
 .posts-heading {
   padding: 20px 30px;
@@ -137,11 +131,13 @@ body {
 <div class="room-name">
     <% if @products.blank?%>
         <% @boards.each do |e| %>
+         <%if e.category != "プレゼント"%>
           <div class="posts-heading">
              <a href="/boards/<%= e.id %>"><%= e.title %></a>
              <br>
              <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
            </div>
+           <% end %>
         <% end %><br>
 <% else%>
      <% @products.each do |e| %>
@@ -176,9 +172,11 @@ body {
     <%= f.text_field :address_cont, class: "form-control" %>
     <%= f.label :category_eq, "カテゴリー" %>
     <%= f.select :category_eq, [["選択してください", ""], ["プレゼント", "プレゼント"]], class: "form-control" %>
-    <%= f.search_field :presents_status_cont %>
-    <%= f.label :status, "品物の状態" %>
-    <%= f.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>
+    
+    
+    <!--< f.search_form_for (@search1, as: :p) do |f| %>-->
+    <!--< f.label :status_cont, "品物の状態" %>-->
+    <!--< f.select :status_cont, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>-->
               
     <%= f.submit "Search" %>
 <% end %>

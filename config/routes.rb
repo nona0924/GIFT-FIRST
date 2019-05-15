@@ -12,9 +12,14 @@ Rails.application.routes.draw do
   resources :boards, :only => [:show, :index, :new, :create, :edit, :update, :destroy] 
   get "evaluations/new/:id" => "evaluations#new"
   resources :evaluations, :only => [:create]
+  resources :comments, only: [:create]
+  resources :friends, only: [:index]
 #   resources :likes, :only => [:create, :destroy]
   post "likes/:post_id/create" => "likes#create"
   post "likes/:post_id/destroy" => "likes#destroy"
+  
+  post "comments/:post_id/create" => "comments#create"
+  post "comments/:post_id/destroy" => "comments#destroy"
   
  
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190503065119) do
+ActiveRecord::Schema.define(version: 20190514160024) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "user_id"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20190503065119) do
     t.integer  "user_id"
     t.integer  "board_id"
     t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "reply_comment"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -44,6 +45,13 @@ ActiveRecord::Schema.define(version: 20190503065119) do
     t.integer  "point"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "follower"
+    t.integer  "followed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "lesson_images", force: :cascade do |t|

@@ -10,8 +10,6 @@ class PostsController < ApplicationController
 
   def index
       @posts = Post.all.order(created_at: :desc)
-      @user = User.find_by(id: params[:user_id])
-      @users = User.find_by(icon: params[:@user])
   end
 
   def new

@@ -73,8 +73,8 @@ img{
 <div class="room-name">
 <% @posts.each do |p| %>
  <div class="posts-heading">
-  <% if @users.icon? %>
-  　 <img src="<%= "/uploads/#{p.user.image_name}" %>">
+  <% if p.user.icon? %>
+  　 <%= image_tag p.user.icon.to_s, class: "profile" %>
     <% else %>
     <img src="<%= "/assets/image6.jpg"%>" class="profile">
   <% end %>

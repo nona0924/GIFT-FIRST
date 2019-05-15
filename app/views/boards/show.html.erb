@@ -1,40 +1,260 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.posts-show form {
+  display: inline;
+}
+
+.posts-show-item {
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+  color:#00000096;
+  overflow: scroll;
+}
+
+.posts-show-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 40%;
+  box-shadow: 0 2px 6px #c1ced7;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+.posts-show-item .post-user-name a {
+  vertical-align: middle;
+  font-size: 24px;
+  margin-left: 15px;
+}
+
+.posts-show-item p {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.post-time {
+  color: #8899a6;
+  margin-bottom: 10px;
+}
+
+
+.like-btn {
+  color: #8899a6;
+}
+
+.like-btn-unlike {
+  color: #ff2581;
+}
+
+
+.posts-show-item .fa {
+  font-size: 16px;
+  margin-right: 3px;
+}
+
+.post-menus {
+  float: right;
+}
+
+.post-menus a, .post-menus input {
+  color: #8899a6;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.posts-show-item .photo-first {
+    width:120px;
+    height:120px;
+     border-radius: 1%;
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+.comment-show-item {
+    overflow: scroll;
+    height: 300px;
+    font-size: 15px;
+    padding: 20px;
+    background-color: #ffffffe6;
+    margin-bottom: 15px;
+}
+
+.comment-show  {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  color:#00000096;
+}
+</style>
+
+
+
 <h2>掲示板詳細画面</h2>
+
 <% if @type_flag == "l" %>
-  <p>掲示板タイトル</p>
-　<%= @board.title %>
-　<p>カテゴリー</p>
-　<%= @board.category%>
-　<p>レッスン概要</p>
-　<%= @board. overview %>
-　<p>開催場所住所</p>
-　<%= @board.address %>
-　<!--ここからレッスンモデル-->
-　<p>レッスンタイトル</p>
-　<%= Lesson.find_by(board_id: @board.id).title %>
-　<p>対象年齢</p>
-　<%= Lesson.find_by(board_id: @board.id).target_age %>
-　<p>開催日付</p>
-　<%= Lesson.find_by(board_id: @board.id).lesson_date %>
-　<p>開始時刻</p>
-　<%= Lesson.find_by(board_id: @board.id).start_time %>
-　<p>終了時刻</p>
-　<%= Lesson.find_by(board_id: @board.id).end_time %>
-  
-  <!--< image_tag Present.find_by(board_id: @board.id).image %>-->
+<div class="main posts-show">
+    <div class="posts-show-item">
+      <div class="post-user-name">
+        <% if @user.icon? %>
+         <%= image_tag @user.icon.to_s %>
+        <% else %>
+          <img src="<%= "/assets/image6.jpg"%>" class="profile">
+        <% end %>
+　     <a href="/users/<%= @user.id %>"><%= @user.name %></a>
+      </div>
+       <p>掲示板タイトル</p>
+        　<%= @board.title %>
+        　<p>カテゴリー</p>
+        　<%= @board.category%>
+        　<p>レッスン概要</p>
+        　<%= @board. overview %>
+        　<p>開催場所住所</p>
+        　<%= @board.address %>
+        　<!--ここからレッスンモデル-->
+        　　<% @lessons.each do |d| %>
+        　<p>レッスンタイトル</p>
+        　<%= d.title %>
+        　<p>対象年齢</p>
+        　<%= d.target_age %>
+        　<p>開催日付</p>
+        　<%= d.lesson_date %>
+        　<p>開始時刻</p>
+        　<%= d.start_time %>
+        　<p>終了時刻</p>
+        　<%= d.end_time %>
+        　
+        　<% if d.image.blank? %>
+          <% else %>
+          <p>画像</p>
+          <%= image_tag d.image.to_s, class: "photo-first" %>
+          <% end %>
+        　<% end %>
+        　
+      
+      <div class="post-time">
+        <%= @board.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+      </div>
+
+      <% if @board.user_id == current_user.id %>
+        <div class="post-menus">
+          <%= link_to("編集", "/boards/#{@board.id}/edit") %>
+          <a href="/boards/<%= @board.id %>" data-method="delete">削除する</a>
+        </div>
+        <% else %>
+          <%= komennto %>
+      <% end %>
+    </div>
+</div>
+<br>
+<h2>コメント一覧</h2>
+<div class="comment-show-item">
+<% @comments.each do |c| %>
+  <div class="comment-show">
+    <a href="/users/<%= c.user.id%>"><%= c.user.name %></a>
+    <br>
+    <%= c.comment %>
+  </div>
+  <br>
+<% end %>
+</div>
+
+<br>
+<%= form_for @comment do |f| %>
+  <%= f.hidden_field :board_id, :value => @board.id %>
+  <%= f.text_area :comment, :size => "80x2"%>
+  <br>
+  <%= f.submit 'コメントする' %>
+  <br><br>
+  <a href="/boards" class="button-second ">掲示板一覧ページに戻る</a>
+<% end %>
+<br>
+
 <% else %>
+  
+  <div class="main posts-show">
+    <div class="posts-show-item">
+      <div class="post-user-name">
+        <% if @user.icon? %>
+         <%= image_tag @user.icon.to_s %>
+        <% else %>
+          <img src="<%= "/assets/image6.jpg"%>" class="profile">
+        <% end %>
+       <a href="/users/<%= @user.id %>"><%= @user.name %></a>
+      </div>
+        <p>掲示板タイトル</p>
+         　<%= @board.title %>
+         　<p>品物の概要</p>
+         　<%= @board.overview %>
+         　<p>住所</p>
+         　<%= @board.address %>
+         　
+         　<% @presents.each do |f| %>
+         　<p>ギフトの名前</p>
+         　<%= f.gift_name %>
+         　<p>品物の状態</p>
+         　<%= f.status %>
+         　
+         　<% if f.image.blank? %>
+            <% else %>
+            <p>品物画像</p>
+            <%= image_tag f.image.to_s, class: "photo-first" %>
+            <% end %>
+         　
+         　<% end %>
+            
+        <br>
+      <div class="post-time">
+        <%= @board.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+      </div>
+     
+      <% if @board.user_id == current_user.id %>
+        <div class="post-menus">
+          <%= link_to("編集", "/boards/#{@board.id}/edit") %>
+          <a href="/boards/<%= @board.id %>" data-method="delete">削除する</a>
+        </div>
+        <% else %>
+          <%= komennto %>
+      <% end %>
+    </div>
+</div>
+<br>
 
- <p>掲示板タイトル</p>
-　<%= @board.title %>
-　<p>品物の概要</p>
-　<%= @board.overview %>
-　<p>住所</p>
-　<%= @board.address %>
-　<p>ギフトの名前</p>
-　<%= Present.find_by(board_id: @board.id).gift_name %>
-　<p>品物の状態</p>
-　<%= Present.find_by(board_id: @board.id).status %>
+<h2>コメント一覧</h2>
+<div class="comment-show-item">
+<% @comments.each do |c| %>
+  <div class="comment-show">
+    <a href="/users/<%= c.user.id%>"><%= c.user.name %></a>
+    <br>
+    <%= c.comment %>
+  </div>
+  <br>
+<% end %>
+</div>
 
- 　<!--<p>ギフト画像</p>-->
-  <!-- < image_tag @present.image.to_s %>-->
-　
+<br>
+<%= form_for @comment do |f| %>
+  <%= f.hidden_field :board_id, :value => @board.id %>
+  <%= f.text_area :comment, :size => "80x2"%>
+  <br>
+  <%= f.submit 'コメントする' %>
+  <br><br>
+  <a href="/boards" class="button-second ">掲示板一覧ページに戻る</a>
+<% end %>
+<br>
 <% end %>

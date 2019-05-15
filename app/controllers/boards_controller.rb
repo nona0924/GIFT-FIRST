@@ -5,11 +5,17 @@ class BoardsController < ApplicationController
   def show
     @type_flag = ""
     @board = Board.find(params[:id])
+    @user = User.find(@board.user_id)
     if @board.category == "プレゼント"
         @type_flag = "p"
-        @present = Present.where(board_id: @board.id)
+        @presents = @board.presents
+        @comments = @board.comments
+        @comment = Comment.new
     else
       @type_flag = "l"
+      @lessons = @board.lessons
+      @comments = @board.comments
+      @comment = Comment.new
       logger.debug("======================== gift  = #{@board.id}")
     end
 end
@@ -19,8 +25,8 @@ end
       @search = Board.ransack(params[:q])
       @products = @search.result
       
-      # @search1 = Present.ransack(params[:p], search_key: :p)
-      # @products1 = @search1.result
+      @search1 = Present.ransack(params[:p], search_key: :p)
+      @products1 = @search1.result
 
       # @search2 = Lesson.ransack(params[:w], search_key: :w)
       # @products2 = @search2.result
@@ -76,14 +82,14 @@ end
   end
 
   def destroy
-     @post = Post.find(params[:id])
-     @user = User.find(@post.user_id)
-     if @post.user_id == current_user.id
-     @post.destroy
+     @board = Board.find(params[:id])
+     @user = User.find(@board.user_id)
+     if @board.user_id == current_user.id
+     @board.destroy
       flash[:notice] = "投稿を削除しました"
-      redirect_to("/posts")
+      redirect_to("/boards")
     else
-      redirect_to ("/posts")
+      redirect_to ("/boards")
       flash[:alert] = "無効なユーザー"
     end
   end
