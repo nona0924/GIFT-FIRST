@@ -25,8 +25,8 @@ end
       @search = Board.ransack(params[:q])
       @products = @search.result
       
-      @search1 = Present.ransack(params[:p], search_key: :p)
-      @products1 = @search1.result
+      @search1 = Board.ransack(params[:p])
+      @users = @search1.result(distinct: true)
 
       # @search2 = Lesson.ransack(params[:w], search_key: :w)
       # @products2 = @search2.result

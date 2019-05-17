@@ -20,6 +20,16 @@ class FriendsController < ApplicationController
         @friend_status = "r"
 
       end
-     end
- end
+    end
+    
+    Friend.where(followed: current_user.id).each do |f|
+      if !Friend.find_by('follower = ? and followed = ?', current_user.id, f.follower) 
+      logger.debug("--------------------- 承認待ち　f.followed = #{f.follower}")
+        	@receive_friends.push(f.follower)
+    	    @friend_status = "w"
+
+      end
+    end
+         
+  end
 end

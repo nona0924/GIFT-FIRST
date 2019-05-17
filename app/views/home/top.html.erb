@@ -36,8 +36,7 @@
        </section>
 
       <section class="feature">
-        <img src="assets/main7"
-        width="465" height="270">
+        <img src="<%= "/assets/main7.jpg"%>" class="profile" width="465" height="270">
       <div class="desc">
         <h1>&#127873;プレゼント&#127873;</h1>
         <p>
@@ -104,11 +103,12 @@
 <section class="call-to-action orange-bg">
       <div class="footer_line">
         <div class="button">GIFTをShareする</div>
-        <div class="social twitter"><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter-square"></i></a></div>
-        <div class="social facebook"><a href="https://www.facebook.com/mypage" target="_blank"><i class="fab fa-facebook"></i></a></div>
-        <div class="social instagram"><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></div>
+        <div class="social twitter"><a href="http://twitter.com/share?url=https://calm-cliffs-71962.herokuapp.com/&text=&#127873;GIFTをシェアする!!" target="_blank"><i class="fab fa-twitter-square"></i></a></div>
+        <div class="social facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=https://calm-cliffs-71962.herokuapp.com/" target="_blank"><i class="fab fa-facebook"></i></a></div>
+        <div class="social line"><a href="http://line.me/R/msg/text/?https://calm-cliffs-71962.herokuapp.com(&#127873;GIFTをシェアする!!)" target="_blank"><i class="fab fa-line"></i></a></div>
       </div>
 
+      
    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
      <defs>
       <filter id="goo">
@@ -132,7 +132,7 @@
   $(".button").click(function(){
   $(".social.twitter").toggleClass("clicked");
   $(".social.facebook").toggleClass("clicked");
-  $(".social.instagram").toggleClass("clicked");
+  $(".social.line").toggleClass("clicked");
 })
   
               

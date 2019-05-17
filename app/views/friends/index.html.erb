@@ -4,7 +4,7 @@
 <h3>Friend Requests to approve <i class="fas fa-user-plus"></i> <span class="badge nav-badge"><%= @receive_friends.count %></span></h3>
 <hr>
 <% if @receive_friends.empty? %>
-  <div class="comment">No Request to approve</div>
+  <div class="comment">まだ申請はありません</div>
 <% else %>
   <% @receive_friends.each do |receive_friend| %>
     <div class="users-index-item">

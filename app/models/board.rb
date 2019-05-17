@@ -5,6 +5,7 @@ class Board < ApplicationRecord
     has_many :presents
     has_many :comments
     has_many :replies, class_name: Comment, foreign_key: :reply_comment, dependent: :destroy
+    
     #  def self.search(search)
     #   if search
     #     Board.where(['title LIKE ?', "%#{search}%"])

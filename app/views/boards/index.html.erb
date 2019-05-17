@@ -115,7 +115,7 @@ body {
 		<input id="tab5_1" name="cp_tab" type="radio" checked="checked">
 		<div class="cp_tabpanel">
 		    
-<p>検索</p>
+		<p>検索</p>
 <%= search_form_for @search do |f| %>
     <%= f.label :title_cont, "掲示板 名前" %>
     <%= f.text_field :title_cont, class: "form-control" %>
@@ -126,7 +126,6 @@ body {
     <%= f.submit "Search" %>
 <% end %>
 <hr>
-
 
 <div class="room-name">
     <% if @products.blank?%>
@@ -174,10 +173,10 @@ body {
     <%= f.select :category_eq, [["選択してください", ""], ["プレゼント", "プレゼント"]], class: "form-control" %>
     
     
-    <!--< f.search_form_for (@search1, as: :p) do |f| %>-->
+    <!--< f.search_form_for (@search1, as: :p) url: presents_path do |f| %>-->
     <!--< f.label :status_cont, "品物の状態" %>-->
     <!--< f.select :status_cont, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>-->
-              
+    
     <%= f.submit "Search" %>
 <% end %>
 <hr>
