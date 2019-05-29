@@ -5,15 +5,22 @@ body {
 }
 
 .room-name {
- border: solid 4px #fd7b1b;
+ /*border: solid 4px gray;*/
  overflow: scroll;
- height:300px;
- font-size: 22px;
+ height:400px;
+ font-size: 15px;
  padding:20px;
+ background-color: #ffffffe6;
 }
 
 .room-name a {
   color:gray;
+}
+
+img{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 
 .button-second {
@@ -28,10 +35,12 @@ body {
   padding:5px;
 }
 
-img{
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
+
+.posts-heading {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
 }
 
 </style>
@@ -54,6 +63,8 @@ img{
 <p>ユーザータイプ：<%= @user.user_type%></p>
 <p>自己紹介：<%= @user.profile %></p>
 <br>
+                <%= render 'follow_form' %>
+                 <%= render 'stats' %>
 </div>
 <% if @user.id == current_user.id %>
 <p><a href="/users/edit" class="button-second">ユーザー情報を編集する</a>
@@ -67,17 +78,22 @@ img{
       <br>
     <% if @user.user_type == "講師" %>
     <%= link_to "講師を評価する", "/evaluations/new/#{@user.id}", :class => "button-second" %>
+    <%= link_to "講師の評価を見る", "/evaluations/#{@user.id}", :class => "button-second" %>
     <% end %>
     <% end %>
   </div>
+  
   <% if @user.id == current_user.id%>
     <div class="col-xs-6">
         <h1>チャット一覧</h1>
         <br>
         <div class="room-name">
         <% @entries.each do |e| %>
-        <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a></p>
-        <hr>
+        <div class="posts-heading">
+        <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a><span></span></p>
+        <%= e.updated_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+        <br>
+        </div>
         <% end %>
         </div>
         <br>

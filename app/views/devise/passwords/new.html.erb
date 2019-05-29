@@ -1,15 +1,35 @@
+<style>
+body {
+  font-family: 'Bluesky';
+}
+
+.second {
+  width:250px;
+  color:black;
+  margin-bottom:10px;
+}
+
+.third {
+  width:200px;
+  box-shadow: 0 1px #6c757d63;
+}
+.third:hover{
+    color:red;
+}
+</style>
+
 <h2>パスワード再設定メールを送信する</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email %><br/>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "second"%>
   </div>
 
   <div class="actions">
-    <%= f.submit "送信する" %>
+    <%= f.submit "送信する", class: "third" %>
   </div>
 <% end %>
 

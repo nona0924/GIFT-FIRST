@@ -16,41 +16,162 @@ body {
   padding:5px;
 }
 
-/*.profile {*/
-/*    border-bottom: solid 2px #fd7b1b;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
 img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
 
-.balloon6 {
+
+.room-name {
+ border: solid 4px gray;
  overflow: scroll;
- height:450px;
- font-size: 22px;
+ height:400px;
+ font-size: 15px;
  padding:20px;
- margin-bottom: 20px;
+ background-color: #ffffffe6;
 }
 
+.room-name a {
+  color:gray;
+}
+
+.room-name a:hover {
+  color: #3ecdc6;
+}
+
+.posts-heading {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  margin-bottom: -30px;
+}
+
+.main {
+  position:relative;
+  top: -70px;
+  left: 120px;
+}
+
+.room-name2 {
+ border: solid 2px gray;
+ height:250px;
+ font-size: 15px;
+ padding:20px;
+ background-color: #ffffffe6;
+ margin-bottom: 15px;
+ color: #070d13cf;
+}
+
+.chenge {
+    width:380px;
+    display:inline-block;
+    position: relative;
+    top: 40px;
+    left: 20px;
+}
+.name {
+  position: relative;
+  top: 15px;
+  left: 60px;
+}
+
+.first {
+    width:380px;
+    display: inline-block;
+    position: relative;
+    top: 40px;
+    left: 0px;
+}
+.c-first {
+  position: relative;
+  top: 15px;
+  left: 60px;
+}
+
+.catego {
+    display: inline-block;
+    position: relative;
+    top: 85px;
+    left:55px;
+}
+.c-second {
+  position: relative;
+  top: 80px;
+  left: -810px;
+}
+
+.third {
+  position: relative;
+  top: 80px;
+  left: 150px;
+  width:250px;
+  box-shadow: 0 1px #6c757d63;
+}
+.third:hover{
+    color:red;
+}
 </style>
 
 <h1>ユーザー一覧</h1>
 <br>
-    <div class="balloon6">
+
+<div class="room-name2">	    
+		<h2>検索</h2>
+<%= search_form_for @search do |f| %>
+    <%= f.label :name_cont, "名前", class: "name" %>
+    <%= f.text_field :name_cont, class: "form-control chenge" %>
+    <%= f.label :address_city_cont, "市区町村", class: "c-first" %>
+    <%= f.text_field :address_city_cont, class: "form-control first" %>
+    <%= f.label :user_type_eq, "ユーザータイプ", class: "c-second" %>
+    <p class="catego">
+    <%= f.select :user_type_eq, [["選択してください　　　　    　　　　　　　　   ", ""],["講師", "講師"],["生徒", "生徒"], ["その他", "その他"]], class: "form-control" %>
+    </p>
+    <%= f.submit "Search", class: "third"%>
+<% end %>
+</div>
+<br>
+
+<br>
+    <div class="room-name">
+<% if @products.blank?%>
      <% @users.each do |u| %>
+      <div class="posts-heading">
         <% if u.icon? %>
-           <div class="faceicon">
              <%= image_tag u.icon.to_s %>
-             </div>
             <% else %>
             <img src="<%= "/assets/image6.jpg"%>">
           <% end %>
-                 <p><a href="/users/<%= u.id %>"><%= u.name %>さん</a></p>
-          <br>
+                <div class="main">
+                 <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>
+                 <%if u.profile.present? %>
+                 <div><a href="/users/<%= u.id %>"><%= u.profile %></a></div>
+                 <% end %>
+                 </div>
+          </div>
         <% end %>
-    </div>
-<a href="/posts" class="button-second">トップに戻る</a>
+        <br>
+    <% else %>
+     <% @products.each do |u| %>
+       <div class="posts-heading">
+           <% if u.icon? %>
+             <%= image_tag u.icon.to_s %>
+            <% else %>
+            <img src="<%= "/assets/image6.jpg"%>">
+          <% end %>
+                <div class="main">
+                 <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>
+                 <%if u.profile.present? %>
+                 <div><a href="/users/<%= u.id %>"><%= u.profile %></a></div>
+                 <% end %>
+                 </div>
+          </div>
+<% end %>
+<% end %>
 <br>
+    </div>
+    
+    <br>
+<a href="/posts" class="button-second">トップに戻る</a>
+<br><br>

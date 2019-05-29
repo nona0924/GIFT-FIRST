@@ -5,15 +5,21 @@ body {
 }
 
 .room-name {
- border: solid 4px #fd7b1b;
+ border: solid 2px gray;
  overflow: scroll;
- height:300px;
- font-size: 22px;
+ height:400px;
+ font-size: 15px;
  padding:20px;
+ background-color: #ffffffe6;
+ margin-bottom: 15px;
 }
 
 .room-name a {
   color:gray;
+}
+
+.room-name a:hover {
+  color: #3ecdc6;
 }
 
 .button-second {
@@ -27,14 +33,24 @@ body {
   font-family: 'Bluesky';
   padding:5px;
 }
+
+.posts-heading {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
 </style>
 
 <h1>チャット一覧</h1>
 <br>
 <div class="room-name">
 <% @entries.each do |e| %>
+ <div class="posts-heading">
   <a href="/rooms/<%= e.room_id %>"><%= e.room.room_name %></a>
   <br>
+ <%= e.room.updated_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+  </div>
 <% end %>
 </div>
 <br>

@@ -56,6 +56,8 @@ end
    else
      @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address, :category).merge(:user_id => current_user.id))
      @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+     flash[:notice] = "投稿を作成しました"
+      redirect_to("/boards")
   end
   end
 

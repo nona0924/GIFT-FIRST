@@ -4,6 +4,10 @@ body {
   font-family: 'Bluesky';
 }
 
+.top {
+    border-bottom: 2px solid #fd264f;
+}
+
 .button-second {
   background: linear-gradient(45deg, #B388EB, #8093F1);
   border-radius: 10px;
@@ -27,7 +31,7 @@ body {
 }
 
 .room-name {
- /*border: solid 4px gray;*/
+ border: solid 2px gray;
  overflow: scroll;
  height:400px;
  font-size: 15px;
@@ -36,107 +40,101 @@ body {
  margin-bottom: 15px;
 }
 
-*, *:before, *:after {
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
-}
-.cp_tab {
-	display: block;
-	display: -webkit-flex;
-	display:         flex;
-	-webkit-flex-wrap: wrap;
-	        flex-wrap: wrap;
-	margin: 1em auto;
-	overflow: hidden;
-}
-.cp_tab input[type='radio'] {
-	border-bottom: 1px solid rgba(239, 237, 239, 0.5);
-	cursor: pointer;
-	-webkit-appearance: none;
-	        appearance: none;
-	display: block;
-	width: 100%;
-	outline: none;
-	-webkit-transition: all 0.3s ease-in-out;
-	        transition: all 0.3s ease-in-out;
-}
-.cp_tab .cp_tabpanels label {
-	cursor: pointer;
-	display: block;
-	line-height: 1em;
-	padding: 2rem 0;
-	text-align: center;
-}
-.cp_tab [type="radio"]:hover,
-.cp_tab [type='radio']:focus {
-	border-bottom: 1px solid #fd264f;
-}
-.cp_tab [type='radio']:checked {
-	border-bottom: 2px solid #fd264f;
-}
-.cp_tab [type='radio']:checked + .cp_tabpanel {
-	opacity: 1;
-}
-.cp_tab [type='radio'] + .cp_tabpanel {
-	display: block;
-	opacity: 0;
-	padding: 2rem 0;
-	width: 90%;
-	-webkit-transition: all 0.3s ease-in-out;
-	        transition: all 0.3s ease-in-out;
-}
-.cp_tab .cp_tabpanels {
-	width: 50%;
-}
-.cp_tab .cp_tabpanels [type='radio'] + .cp_tabpanel {
-	width: 200%;
-	margin-left: 200%;
-}
-.cp_tab .cp_tabpanels [type='radio']:checked + .cp_tabpanel {
-	margin-left: 0;
-}
-.cp_tab .cp_tabpanels:last-child [type='radio'] + .cp_tabpanel {
-	margin-left: 100%;
-}
-.cp_tab .cp_tabpanels:last-child [type='radio']:checked + .cp_tabpanel {
-	margin-left: -100%;
+.room-name2 {
+ border: solid 2px gray;
+ height:250px;
+ font-size: 15px;
+ padding:20px;
+ background-color: #ffffffe6;
+ margin-bottom: 15px;
+ color: #070d13cf;
 }
 
+.chenge {
+    width:380px;
+    display:inline-block;
+    position: relative;
+    top: 40px;
+    left: -27px;
+}
+.name {
+  position: relative;
+  top: 15px;
+  left: 55px;
+}
+
+.first {
+    width:380px;
+    display: inline-block;
+    position: relative;
+    top: 40px;
+    left: -70px;
+}
+.c-first {
+  position: relative;
+  top: 15px;
+  left: 30px;
+}
+
+.catego {
+    display: inline-block;
+    position: relative;
+    top: 85px;
+    left:55px;
+}
+.c-second {
+  position: relative;
+  top: 80px;
+  left: -910px;
+}
+
+.third {
+  position: relative;
+  top: 80px;
+  left: 175px;
+  width:250px;
+  box-shadow: 0 1px #6c757d63;
+}
+.third:hover{
+    color:red;
+}
 
 </style>
 
 
-<h1>掲示板一覧</h1>
+<h1 class="top">掲示板一覧</h1>
 <br>
-
-<div class="cp_tab">
-	<div class="cp_tabpanels">
-		<label for="tab5_1">レッスン掲示板</label>
-		<input id="tab5_1" name="cp_tab" type="radio" checked="checked">
-		<div class="cp_tabpanel">
-		    
-		<p>検索</p>
+<div class="room-name2">	    
+		<h2>検索</h2>
 <%= search_form_for @search do |f| %>
-    <%= f.label :title_cont, "掲示板 名前" %>
-    <%= f.text_field :title_cont, class: "form-control" %>
-    <%= f.label :address_cont, "レッスン開催地" %>
-    <%= f.text_field :address_cont, class: "form-control" %>
-    <%= f.label :category_eq, "カテゴリー" %>
-    <%= f.select :category_eq, [["選択してください", ""], ["スポーツ系", "スポーツ系"], ["武道系", "武道系"], ["学習系", "学習系"], ["芸術系", "芸術系"], ["音楽系", "音楽系"], ["料理系", "料理系"]], class: "form-control" %>
-    <%= f.submit "Search" %>
+    <%= f.label :title_cont, "掲示板 名前", class: "name" %>
+    <%= f.text_field :title_cont, class: "form-control chenge" %>
+    <%= f.label :address_cont, "レッスン開催地", class: "c-first" %>
+    <%= f.text_field :address_cont, class: "form-control first" %>
+    <%= f.label :category_eq, "カテゴリー", class: "c-second" %>
+    <p class="catego">
+    <%= f.select :category_eq, [["選択してください　　　　    　　　　　　　　   ", ""], ["スポーツ系", "スポーツ系"],
+    ["武道系", "武道系"], ["学習系", "学習系"], ["芸術系", "芸術系"], ["音楽系", "音楽系"], ["料理系", "料理系"], ["プレゼント", "プレゼント"]], class: "form-control" %>
+    </p>
+    
+      <!--< f.search_form_for (@search1, as: :p) url: presents_path do |f| %>-->
+    <!--< f.label :status_cont, "品物の状態" %>-->
+    <!--< f.select :status_cont, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>-->
+    
+    
+    <%= f.submit "Search", class: "third"%>
 <% end %>
-<hr>
+</div>
+<br>
 
 <div class="room-name">
     <% if @products.blank?%>
         <% @boards.each do |e| %>
-         <%if e.category != "プレゼント"%>
           <div class="posts-heading">
              <a href="/boards/<%= e.id %>"><%= e.title %></a>
              <br>
              <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
            </div>
-           <% end %>
         <% end %><br>
 <% else%>
      <% @products.each do |e| %>
@@ -155,58 +153,3 @@ body {
 <p><a href="/" class="button-second">トップに戻る</a></p>
 <br>
 		　
-		</div>
-	</div>
-	
-	
-	<div class="cp_tabpanels">
-		<label for="tab5_2">ギフト掲示板</label>
-		<input id="tab5_2" name="cp_tab" type="radio">
-		<div class="cp_tabpanel">
-			<p>検索</p>
-<%= search_form_for @search do |f| %>
-    <%= f.label :title_cont, "掲示板 名前" %>
-    <%= f.text_field :title_cont, class: "form-control" %>
-    <%= f.label :address_cont, "エリア" %>
-    <%= f.text_field :address_cont, class: "form-control" %>
-    <%= f.label :category_eq, "カテゴリー" %>
-    <%= f.select :category_eq, [["選択してください", ""], ["プレゼント", "プレゼント"]], class: "form-control" %>
-    
-    
-    <!--< f.search_form_for (@search1, as: :p) url: presents_path do |f| %>-->
-    <!--< f.label :status_cont, "品物の状態" %>-->
-    <!--< f.select :status_cont, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]] ,class:"form-control" %>-->
-    
-    <%= f.submit "Search" %>
-<% end %>
-<hr>
-
-
-<div class="room-name">
-    <% if @products.blank?%>
-        <% @boards.each do |e| %>
-          <div class="posts-heading">
-             <a href="/boards/<%= e.id %>"><%= e.title %></a>
-             <br>
-             <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
-           </div>
-        <% end %><br>
-<% else%>
-     <% @products.each do |e| %>
-       <div class="posts-heading">
-         <a href="/boards/<%= e.id %>"><%= e.title %></a>
-         <br>
-         <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
-       </div><br>
-<% end %>
-<% end %>
-</div>
-
-
-<p><a href="/users/<%= current_user.id %>" class="button-second"><%= current_user.name %>のページに戻る</a></p>
-<br>
-<p><a href="/" class="button-second">トップに戻る</a></p>
-<br>
-		</div>
-	</div>
-</div>

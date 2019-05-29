@@ -1,0 +1,115 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.room-name {
+ border: solid 2px gray;
+ overflow: scroll;
+ height:400px;
+ font-size: 15px;
+ padding:20px;
+ background-color: #ffffffe6;
+ margin-bottom: 15px;
+}
+
+.room-second {
+ border: solid 2px gray;
+ height:120px;
+ font-size: 15px;
+ padding:15px;
+ background-color: #ffffffe6;
+ margin-bottom: 10px;
+ color: #343a40c9;
+}
+
+.room-name a {
+  color:gray;
+}
+
+.room-name a:hover {
+  color: #3ecdc6;
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+.posts-heading {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.main {
+  position:relative;
+  top: -25px;
+  left: 110px;
+}
+
+.rai {
+  position:relative;
+  top: -15px;
+  left: 10px;
+}
+</style>
+
+
+
+		
+		<div class="room-second">
+		 <h1><%= @user.name %>の評価一覧</h1>
+		 <div id="rateYo">評価平均：<%= @average %></div>
+		 <p>評価件数：<%= @eva_count %></p>
+		</div>
+		<br>
+	    <div class="room-name">
+        	<% @evas.each do |f| %>
+      	 <div class="posts-heading">
+      <% if f.user.icon? %>
+             <%= image_tag f.user.icon.to_s %>
+            <% else %>
+            <img src="<%= "/assets/image6.jpg"%>">
+    <% end %>
+      	  <a href="/users/<%= f.user.id%>", class="rai"><%= f.user.name %></a>
+      	<div class="main">
+           <p>評価ポイント：<%= f.point %></p> 
+           <p>コメント：<%= f.message %></p>
+           </div>
+            <%= f.updated_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+           <br>
+           </div>
+            <% end %>
+            </div>
+
+<br>
+<p><a href="/users/<%= current_user.id %>" class="button-second"><%= current_user.name %>のページに戻る</a></p>
+<br>
+<p><a href="/" class="button-second">トップに戻る</a></p>
+
+<script>
+    $(function () {
+  $('#rateYo).rateYo({
+    starWidth: "20px",
+    rating: 5,
+    halfStar: true,
+    readOnly: true
+  });
+});
+</script>

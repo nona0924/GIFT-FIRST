@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190514160024) do
+ActiveRecord::Schema.define(version: 20190529104003) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,13 +45,6 @@ ActiveRecord::Schema.define(version: 20190514160024) do
     t.integer  "point"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-  end
-
-  create_table "friends", force: :cascade do |t|
-    t.integer  "follower"
-    t.integer  "followed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "lesson_images", force: :cascade do |t|
@@ -112,11 +105,28 @@ ActiveRecord::Schema.define(version: 20190514160024) do
     t.string   "image"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.index ["following_id"], name: "index_relationships_on_following_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "room_name",  default: "新規チャット"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+  end
+
+  create_table "unreads", force: :cascade do |t|
+    t.integer  "message_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,6 +6,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     if @user.id == current_user.id
       @entries = current_user.entries
+      
     else
       @room = Room.new
       @entry = Entry.new
@@ -28,7 +29,9 @@ class UsersController < ApplicationController
   end
 
   def index
-      @users = User.all
+      @users = User.all.order(created_at: :desc)
+      @search = User.ransack(params[:q])
+      @products = @search.result
   end
 
   def edit
@@ -48,6 +51,18 @@ class UsersController < ApplicationController
       redirect_to("/posts")
       flash[:alert] = "無効なユーザー"
   end
+  end
+  
+  def following
+      @user  = User.find(params[:id])
+      @users = @user.followings
+      render 'show_follow'
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follower'
   end
   
   private

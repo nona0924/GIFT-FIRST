@@ -1,0 +1,79 @@
+<style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+
+.room-name {
+ /*border: solid 4px gray;*/
+ overflow: scroll;
+ height:400px;
+ font-size: 15px;
+ padding:20px;
+ background-color: #ffffffe6;
+}
+
+.room-name a {
+  color:gray;
+}
+
+.room-name a:hover {
+  color: #3ecdc6;
+}
+
+.posts-heading {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  margin-bottom: -30px;
+}
+
+.main {
+  position:relative;
+  top: -70px;
+  left: 120px;
+}
+</style>
+
+<h1>フォロー</h1>
+<br>
+    <div class="room-name">
+    <% @user.followings.each do |u| %>
+      <div class="posts-heading">
+        <% if u.icon? %>
+             <%= image_tag u.icon.to_s %>
+            <% else %>
+            <img src="<%= "/assets/image6.jpg"%>">
+          <% end %>
+                <div class="main">
+                 <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>
+                 <%if u.profile.present? %>
+                 <div><a href="/users/<%= u.id %>"><%= u.profile %></a></div>
+                 <% end %>
+                 </div>
+          </div>
+        <% end %>
+    </div>
+    <br>
+<a href="/posts" class="button-second">トップに戻る</a>
+<br>
