@@ -1,0 +1,88 @@
+  <style>
+
+body {
+  font-family: 'Bluesky';
+}
+
+.button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+.top {
+    border-bottom: 2px solid #fd264f;
+}
+  </style>
+  
+  <% if @board.category == "プレゼント"%>
+  
+  <h1 class="top">掲示板変更画面</h1>
+    <%= form_for @board do |f| %>
+      <br>
+        <p>掲示板タイトル</p>
+      　<%= f.text_field :title, :class => "form-control my-form" %>
+      　<p>品物の概要</p>
+      　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
+      　<p>住所</p>
+      　<%= f.text_area :address, :class => "form-control my-form" %>
+      　
+      　<%= f.hidden_field :category, :value => "プレゼント" %>
+      　
+      　<%= fields_for @present do |p| %>
+          　<p>ギフトの名前</p>
+          　<%= p.text_field :gift_name, :class => "form-control my-form" %>
+          　<p>品物の状態</p>
+          　<%= p.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]],class:"form-control" %>
+          　<br>
+          　<p>ギフト画像</p>
+            <%= p.file_field :image, :class => "form-control my-form" %>
+　      <% end %>
+       <br>
+       <%= f.submit "変更する", :class => "button-second"  %>
+    <% end %>
+     <br>
+    <a href="/posts" class="button-second">トップに戻る</a>
+    
+    <% else %>
+    <h1 class="top">掲示板変更画面</h1>
+			 <%= form_for @board do |f| %><br>
+          <% logger.debug("================================== html レッスン") %>
+            <p>掲示板タイトル</p>
+          　<%= f.text_field :title, :class => "form-control my-form" %>
+          　<p>レッスン概要</p>
+          　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
+          　<p>開催場所住所</p>
+          　<%= f.text_area :address, :class => "form-control my-form" %>
+          　<p>カテゴリーを選択</p>
+          　<%= f.select :category, [["スポーツ系", "スポーツ系"], ["武道系", "武道系"], ["学習系", "学習系"], ["芸術系", "芸術系"], ["音楽系", "音楽系"], ["料理系", "料理系"]] ,class:"form-control" %>
+            　<%= fields_for @lesson do |l| %>
+                　<p>レッスンタイトル</p>
+                　<%= l.text_field :title, :class => "form-control my-form" %>
+                　<p>対象年齢</p>
+                　<%= l.text_field :target_age, :class => "form-control my-form" %>
+                　<p>開催日付</p>
+                　<%= l.date_field :lesson_date, :class => "form-control my-form" %>
+                　<p>開始時刻</p>
+                　<%= l.time_field :start_time, :class => "form-control my-form" %>
+                　<p>終了時刻</p>
+                　<%= l.time_field :lesson_date, :class => "form-control my-form" %>
+                　<p>画像</p>
+                  <%= l.file_field :image, :class => "form-control my-form" %>
+            　<% end %>
+             <br>
+            <%= f.submit "変更する", :class => "button-second"  %>
+          <% end %>
+          <br>
+          <a href="/posts" class="button-second">トップに戻る</a>
+		</div>
+	</div>
+
+    
+<% end %>

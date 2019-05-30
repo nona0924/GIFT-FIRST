@@ -1,50 +1,36 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 /*!
  * Start Bootstrap - Stylish Portfolio v5.0.4 (https://startbootstrap.com/template-overviews/stylish-portfolio)
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio/blob/master/LICENSE)
  */
-
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600");
 @font-face {
   font-family: 'Bluesky';
-  src: font-url('Mamelon.otf') format('truetype');
+  src: font-url("Mamelon.otf") format("truetype");
   font-weight: normal;
-  font-style: normal;
-}
- 
+  font-style: normal; }
 .cover {
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0) 40%,rgba(255,255,255,0.5) 60%,rgba(255,255,255,1) 100%),url(/1/main4.jpg);
-  height:600px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5) 60%, white 100%), url(//main4.jpg);
+  height: 600px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;
-}
+  -o-background-size: cover; }
 
-.header-content{
-  color:white;
-  font-size:75px;
-  padding-top:300px;
-  font-family: 'Bluesky';
-}
+.header-content {
+  color: white;
+  font-size: 75px;
+  padding-top: 300px;
+  font-family: 'Bluesky'; }
 
-.header-second{
-  font-size:30px;
-  color:white;
-  // font-family: 'Anton', sans-serif;
-  font-family: 'Bluesky';
-}
-
-// ---------- button ----------------
+.header-second {
+  font-size: 30px;
+  color: white;
+  font-family: 'Bluesky'; }
 
 .btn-circle-border-double {
   display: inline-block;
   text-decoration: none;
-  // background: #87befd;
-  // background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
   background: linear-gradient(45deg, #B388EB, #8093F1);
   color: white;
   width: 250px;
@@ -55,87 +41,69 @@
   text-align: center;
   overflow: hidden;
   transition: .6s;
-  font-size:22px;
+  font-size: 22px;
   font-family: 'Bluesky';
-  border-radius: 20px;
-}
+  border-radius: 20px; }
 
 .btn-circle-border-double:hover {
   -webkit-transform: rotateY(360deg);
   transform: rotateY(360deg);
-  text-decoration: none;
-}
+  text-decoration: none; }
 
-
-// --------
 .section-container {
-  width:950px;
+  width: 950px;
   margin: auto;
-  font-family: 'Bluesky';
-}
+  font-family: 'Bluesky'; }
 
 .section-title {
- text-align: center;
- font-weight: normal;
- font-size: 60px;
- margin-bottom: 60px;
- margin-top: 10px;
-}
+  text-align: center;
+  font-weight: normal;
+  font-size: 60px;
+  margin-bottom: 60px;
+  margin-top: 10px; }
 
 .section-title::after {
- content: attr(data-subtitle);
- display: block;
- font-size: 30px;
- color: #aaa;
- padding-top: 10px;
-}
+  content: attr(data-subtitle);
+  display: block;
+  font-size: 30px;
+  color: #aaa;
+  padding-top: 10px; }
 
 /* features */
-
 .feature h1 {
   font-weight: normal;
-  font-size: 50px;
-}
+  font-size: 50px; }
 
 .feature p {
   font-weight: normal;
-  font-size: 20px;
-}
+  font-size: 20px; }
 
 .feature .desc {
-  width: 465px;
-}
+  width: 465px; }
 
 .feature:nth-of-type(odd) .desc {
   float: right;
-  padding-left: 10px;
-}
+  padding-left: 10px; }
 
 .feature:nth-of-type(even) .desc {
   float: left;
-  padding-right: 10px;
-}
+  padding-right: 10px; }
 
 .feature:not(:last-child) {
-  margin-bottom: 60px;
-}
+  margin-bottom: 60px; }
 
 .feature {
-  overflow: hidden;
-}
+  overflow: hidden; }
 
 /* voices */
-
 .voices {
   background: #f8f8f8;
   font-family: 'Bluesky';
-  margin-top:25px;
-}
+  margin-top: 25px; }
 
 .voices .flex {
   display: flex;
-  justify-content:space-evenly;
-}
+  justify-content: space-evenly; }
 
 .voice {
   width: 350px;
@@ -145,16 +113,16 @@
   position: relative;
   box-sizing: border-box;
   padding: 200px 30px 25px;
-  margin: 10px;
-} 
+  margin: 10px; }
 
 .type-1 {
-  background-color: #5BC479;
-}.type-2 {
-  background-color: #ffcb00;
-}.type-3 {
-  background-color: #ff726c;
-}
+  background-color: #5BC479; }
+
+.type-2 {
+  background-color: #ffcb00; }
+
+.type-3 {
+  background-color: #ff726c; }
 
 .voice img {
   border: 5px solid #fff;
@@ -163,57 +131,41 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  top: 40px;
-}
+  top: 40px; }
 
 .voice h1 {
   text-align: center;
   font-size: 18px;
-  font-weight: normal;
-}
+  font-weight: normal; }
 
 .voices .section-title {
-  margin-bottom: 50px;
-}
+  margin-bottom: 50px; }
 
 /* call-to-action */
-
 .call-to-action {
-  text-align: center;
-}
+  text-align: center; }
 
 .section-title {
-  margin-bottom: 15px;
-}
+  margin-bottom: 15px; }
 
 .call-to-action {
-  margin-bottom: -30px;
-}
-
+  margin-bottom: -30px; }
 
 /* footer */
-
 footer {
   padding: 10px 0;
   text-align: center;
-  color: #aaa;
-}
+  color: #aaa; }
 
 .desc p {
   overflow: scroll;
-  height: 200px;
-}
-
-
-// -------- shere-------------
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600');
+  height: 200px; }
 
 .footer_line {
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  filter:url('#goo');
-}
+  filter: url("#goo"); }
 
 .button {
   z-index: 99;
@@ -227,8 +179,7 @@ footer {
   letter-spacing: 1px;
   font-weight: 200;
   border: double 4px white;
-  font-family: 'Bluesky';
-}
+  font-family: 'Bluesky'; }
 
 .social {
   opacity: 0;
@@ -240,31 +191,24 @@ footer {
   display: inline-block;
   color: #FFF;
   font-size: 30px;
-  text-align: center;
-  i {
-   margin-top: 10px;
-  }
-  
-  a {
-    color: #FFF;
-  }
-}
+  text-align: center; }
+  .social i {
+    margin-top: 10px; }
+  .social a {
+    color: #FFF; }
 
 .twitter {
-  background: #00aced;
-}
+  background: #00aced; }
 
 .facebook {
-  background: #3b5998;
-}
+  background: #3b5998; }
 
 .line {
-  background: #00b900;
-}
-
+  background: #00b900; }
 
 .clicked {
   opacity: 1;
   transition: 1.2s all ease;
-  transform: translateY(70px);
-}
+  transform: translateY(70px); }
+
+/*# sourceMappingURL=home.css.map */

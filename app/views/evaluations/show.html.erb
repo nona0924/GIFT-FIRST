@@ -85,7 +85,7 @@ img {
       <% if f.user.icon? %>
              <%= image_tag f.user.icon.to_s %>
             <% else %>
-            <img src="<%= "/assets/image6.jpg"%>">
+            <%= image_tag("image6.jpg") %>
     <% end %>
       	  <a href="/users/<%= f.user.id%>", class="rai"><%= f.user.name %></a>
       	<div class="main">

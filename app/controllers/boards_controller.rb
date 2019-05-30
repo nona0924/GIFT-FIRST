@@ -24,12 +24,6 @@ end
       @boards = Board.all.order(created_at: :desc)
       @search = Board.ransack(params[:q])
       @products = @search.result
-      
-      @search1 = Board.ransack(params[:p])
-      @users = @search1.result(distinct: true)
-
-      # @search2 = Lesson.ransack(params[:w], search_key: :w)
-      # @products2 = @search2.result
     end
   
 
@@ -63,6 +57,9 @@ end
 
   def edit
       @board = Board.find(params[:id])
+      
+      @lesson = Lesson.find_by(board_id: @board.id)
+      @present = Present.find_by(board_id: @board.id)
       if @board.user_id == current_user.id
     else
       redirect_to("/posts")
@@ -71,10 +68,15 @@ end
   end
 
   def update
-      @post = Post.find(params[:id])
-      @user = User.find(@post.user_id)
-      if @post.user_id == current_user.id
-      @post.update(params.require(:post).permit(:content, :post_image))
+      @board = Board.find(params[:id])
+      @user = User.find(@board.user_id)
+      if @board.user_id == current_user.id
+          @board = Board.update(params.require(:board).permit(:user_id, :title, :overview, :address, :category).merge(:user_id => current_user.id))
+       if @board.category == "プレゼント"
+           @present = Present.update(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+      else 
+           @lesson = Lesson.update(params.require(:lesson).permit(:board_id, :title, :image, :target_age, :lesson_date, :start_time, :end_time).merge(:board_id => @board.id))
+      end
       flash[:notice] = "投稿を編集しました"
       redirect_to("/posts")
     else

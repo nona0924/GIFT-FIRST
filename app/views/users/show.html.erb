@@ -23,6 +23,12 @@ img{
   border-radius: 50%;
 }
 
+.icon {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
 .button-second {
   background: linear-gradient(45deg, #B388EB, #8093F1);
   border-radius: 10px;
@@ -56,7 +62,9 @@ img{
      <%= image_tag @user.icon.to_s %>
      </div>
     <% else %>
-    <img src="<%= "/assets/image6.jpg"%>">
+    <div class="faceicon">
+    <%= image_tag("image6.jpg", :class => "icon") %>
+    </div>
   <% end %>
 <br>
 <p>名前：<%= @user.name %>さん</p>

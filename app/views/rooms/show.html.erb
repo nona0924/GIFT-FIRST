@@ -155,9 +155,15 @@ body {
         <% else %>
         
         <div class="balloon6">
-            <div class="faceicon">
-              <%= image_tag m.user.icon.to_s %>
+              <% if m.user.icon? %>
+              <div class="faceicon">
+             <%= image_tag m.user.icon.to_s %>
+             </div>
+            <% else %>
+           <div class="faceicon">
+            <%= image_tag("image6.jpg") %>
             </div>
+          <% end %>
             <div class="chatting">
               <div class="says">
                 <p> <%= m.message %>

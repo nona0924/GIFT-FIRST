@@ -63,7 +63,7 @@ img {
         <% if u.icon? %>
              <%= image_tag u.icon.to_s %>
             <% else %>
-            <img src="<%= "/assets/image6.jpg"%>">
+            <%= image_tag("image6.jpg") %>
           <% end %>
                 <div class="main">
                  <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>

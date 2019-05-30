@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'managements/index'
+
   devise_for :users, :controllers => {
  :registrations => 'users/registrations',
  :sessions => 'users/sessions'
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
   get "evaluations/new/:id" => "evaluations#new"
   resources :evaluations, :only => [:show, :create]
   resources :comments, only: [:create]
+  resources :managements, only: [:index, :create]
+  
 
 #   resources :likes, :only => [:create, :destroy]
   post "likes/:post_id/create" => "likes#create"

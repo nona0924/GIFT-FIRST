@@ -76,7 +76,7 @@ img{
   <% if p.user.icon? %>
   　 <%= image_tag p.user.icon.to_s, class: "profile" %>
     <% else %>
-    <img src="<%= "/assets/image6.jpg"%>" class="profile">
+    <%= image_tag("image6.jpg", :class => "profile") %>
   <% end %>
   <p class="main"><a href="/posts/<%= p.id %>"><%= User.find(p.user_id).name %></a></p>
   <p class="main"><a href="/posts/<%= p.id %>"><%= p.content %></a></p>

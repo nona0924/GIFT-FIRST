@@ -1,0 +1,8 @@
+<%= form_for @mane do |f| %><br>
+          　<p>カテゴリーを選択</p>
+          　<%= f.select :category, [["トップ", "トップ"], ["メイン1", "メイン1"], ["メイン2", "メイン2"], ["メイン3", "メイン3"], ["フッター", "フッター"], ["イメージ", "イメージ"]] ,class:"form-control" %>
+          　<p>photo</p>
+             <%= f.file_field :image_name, :class => "form-control my-form" %>
+             <br>
+            <%= f.submit "投稿する", :class => "button-second"  %>
+          <% end %>

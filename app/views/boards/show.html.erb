@@ -114,7 +114,7 @@ body {
         <% if @user.icon? %>
          <%= image_tag @user.icon.to_s %>
         <% else %>
-          <img src="<%= "/assets/image6.jpg"%>" class="profile">
+          <%= image_tag("image6.jpg") %>
         <% end %>
 　     <a href="/users/<%= @user.id %>"><%= @user.name %></a>
       </div>
@@ -191,7 +191,7 @@ body {
         <% if @user.icon? %>
          <%= image_tag @user.icon.to_s %>
         <% else %>
-          <img src="<%= "/assets/image6.jpg"%>" class="profile">
+          <%= image_tag("image6.jpg") %>
         <% end %>
        <a href="/users/<%= @user.id %>"><%= @user.name %></a>
       </div>
