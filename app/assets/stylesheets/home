@@ -9,13 +9,14 @@
   src: font-url("Mamelon.otf") format("truetype");
   font-weight: normal;
   font-style: normal; }
-.cover {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5) 60%, white 100%), url(//main4.jpg);
-  height: 600px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover; }
+  
+/*.cover {*/
+/*  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5) 60%, white 100%), url(/public/main4.jpg);*/
+/*  height: 600px;*/
+/*  -webkit-background-size: cover;*/
+/*  -moz-background-size: cover;*/
+/*  background-size: cover;*/
+/*  -o-background-size: cover; }*/
 
 .header-content {
   color: white;
