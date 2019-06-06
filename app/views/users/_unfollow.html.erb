@@ -1,3 +1,18 @@
+<style>
+    .button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  border-radius: 10px;
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+}
+
+</style>
+
 <%= form_for(current_user.following_relationships.find_by(following_id: @user.id), html: { method: :delete }) do |f| %>
-  <%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
+  <%= f.submit "Unfollow", class: "button-second" %>
 <% end %>

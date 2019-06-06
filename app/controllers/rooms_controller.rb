@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   
-  before_action :authenticate_user!, :only => [:create, :show, :index, :edit, :update]
+  before_action :authenticate_user!, :only => [:create, :edit, :update]
 
   def create
     @room = Room.create
@@ -13,13 +13,21 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     if Entry.where(:user_id => current_user.id, :room_id => @room.id).present?
-    @messages = @room.messages
-    @message = Message.new
-    @entries = @room.entries
-  else
-    flash[:alert] = "無効なユーザー"
-    redirect_to :back
-  end
+      @messages = @room.messages
+      @message = Message.new
+      @entries = @room.entries
+      
+      @messages.each do |m|
+        
+       if u = Unread.find_by(user_id: current_user.id, message_id: m.id)
+         u.destroy
+       end
+      end
+      
+    else
+      flash[:alert] = "このチャットの参加者ではありません"
+      redirect_to :back
+    end
   end
 
   def index

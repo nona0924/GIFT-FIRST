@@ -6,7 +6,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     if @user.id == current_user.id
       @entries = current_user.entries
-      
     else
       @room = Room.new
       @entry = Entry.new

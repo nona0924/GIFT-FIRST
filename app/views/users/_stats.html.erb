@@ -1,15 +1,52 @@
+<style>
+
+.stats {
+  font-family: 'Bluesky';
+}
+
+.first {
+  display:inline-block;
+  border: solid 2px gray;
+  background-color: #ffffffe6;
+  margin:10px 0 10px 0;
+  padding: 5px;
+  letter-spacing:1px;
+  border-radius:7px;
+}
+
+.second {
+  display:inline-block;
+  border: solid 2px gray;
+  background-color: #ffffffe6;
+  margin:10px 0 10px 0;
+  padding: 5px;
+  letter-spacing:1px;
+   border-radius:7px;
+}
+
+a {
+  color:#eb8787;
+}
+  
+</style> 
+ 
  <% @user ||= current_user %>
 <div class="stats">
+  <div class="first">
   <a href="<%= following_user_path(@user) %>">
     <strong id="following" class="stat">
       <%= @user.followings.count %>
     </strong>
     following
   </a>
+  </div>
+  
+  <div class="second">
   <a href="<%= followers_user_path(@user) %>">
     <strong id="followers" class="stat">
       <%= @user.followers.count %>
     </strong>
     followers
   </a>
+  </div>
 </div>

@@ -5,7 +5,7 @@ body {
 }
 
 .room-name {
- /*border: solid 4px gray;*/
+ border: solid 4px gray;
  overflow: scroll;
  height:400px;
  font-size: 15px;
@@ -29,6 +29,15 @@ img{
   border-radius: 50%;
 }
 
+.faceicon {
+    display:inline-block;
+    border: solid 2px gray;
+    background-color: #ffffffe6;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    padding: 5px;
+}
+
 .button-second {
   background: linear-gradient(45deg, #B388EB, #8093F1);
   border-radius: 10px;
@@ -48,6 +57,24 @@ img{
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
 }
+
+.numbers {
+    font-size:15px;
+    color:white;
+    margin-left: 15px;
+}
+
+.back {
+    background: #12c32c;
+    padding: 13px;
+    border-radius: 50%;
+}
+
+.back:hover {
+    opacity: 0.8;
+    color:#ff0018;
+}
+
 
 </style>
 
@@ -96,11 +123,19 @@ img{
         <h1>チャット一覧</h1>
         <br>
         <div class="room-name">
+        <% count = 0 %>
         <% @entries.each do |e| %>
+        <% Message.where(room_id: e.room_id).each do |message| %>
+            <% if Unread.find_by(message_id: message.id, user_id: current_user.id) %>
+            <% logger.debug("~~~~~~~~~~~~~~~~~~~~ html #{Unread.find_by(message_id: message.id, user_id: current_user.id).id}") %>
+              <% count += 1 %>
+            <% end %>
+        <% end %>
         <div class="posts-heading">
-        <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a><span></span></p>
+        <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a><span class="numbers back"><%= count %></span></p>
         <%= e.updated_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
         <br>
+       
         </div>
         <% end %>
         </div>

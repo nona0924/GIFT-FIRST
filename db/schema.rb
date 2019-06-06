@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190529114556) do
+ActiveRecord::Schema.define(version: 20190602170819) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "user_id"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 20190529114556) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id"   # 未使用6/6
     t.string   "room_name",  default: "新規チャット"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -132,8 +132,9 @@ ActiveRecord::Schema.define(version: 20190529114556) do
   create_table "unreads", force: :cascade do |t|
     t.integer  "message_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "unread_user_id"  #使わない6/6
   end
 
   create_table "users", force: :cascade do |t|

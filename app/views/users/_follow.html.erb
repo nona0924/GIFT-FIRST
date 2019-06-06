@@ -1,4 +1,18 @@
+<style>
+  .button-second {
+  background: linear-gradient(45deg, #B388EB, #8093F1);
+  color: #FFF;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  border: double 4px white;
+  font-family: 'Bluesky';
+  padding:5px;
+  letter-spacing: 1px;
+}
+</style>
+
 <%= form_for(current_user.following_relationships.build(following_id: @user.id)) do |f| %>
   <div><%= f.hidden_field :following_id %></div>
-  <%= f.submit "Follow", class: "btn btn-large btn-primary follow-btn" %>
+  <%= f.submit "Follow", class: "button-second" %>
 <% end %>
