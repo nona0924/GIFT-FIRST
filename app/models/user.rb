@@ -8,7 +8,7 @@ class User < ApplicationRecord
          has_many :messages
          has_many :entries
          has_many :posts, dependent: :destroy
-         has_many :valuations
+         has_many :evaluations
          has_many :boards
          has_many :comments
          has_many :unreads
