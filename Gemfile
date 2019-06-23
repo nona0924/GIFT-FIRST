@@ -66,3 +66,5 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 
 gem 'ransack'
+
+gem 'rails_12factor', group: :production
