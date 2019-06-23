@@ -82,9 +82,8 @@ img {
 	    <div class="room-name">
         	<% @evas.each do |f| %>
       	 <div class="posts-heading">
-      	     <% logger.debug("--------------------------------- f.user=#{f.user_id}")%>
-      <% if User.find_by(id: f.user_id).icon %>
-             <%= image_tag User.find_by(id: f.user_id).icon.to_s %>
+      <% if f.user.icon? %>
+             <%= image_tag f.user.icon.to_s %>
             <% else %>
             <%= image_tag("image6.jpg") %>
     <% end %>

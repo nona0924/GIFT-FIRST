@@ -8,9 +8,6 @@ class EvaluationsController < ApplicationController
         @evas = Evaluation.all.order(created_at: :desc)
         @average = Evaluation.average(:point).round(1)
         @eva_count = @evas.count
-        @evas.each do |e|
-            logger.debug("-------------- e.user_id = #{e.user_id} ")
-        end
    end
    
    
