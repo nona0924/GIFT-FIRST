@@ -6,7 +6,7 @@ class EvaluationsController < ApplicationController
     def show
         @user = User.find(params[:id])
         @evas = Evaluation.where(evaluated_user_id: params[:id]).order(created_at: :desc)
-        @average = Evaluation.average(:point).round(1)
+        @average = Evaluation.where(evaluated_user_id: params[:id]).average(:point).round(1)
         @eva_count = @evas.count
    end
    
