@@ -1,9 +1,9 @@
 class Board < ApplicationRecord
     
     belongs_to :user
-    has_many :lessons
-    has_many :presents
-    has_many :comments
+    has_many :lessons, :dependent => :destroy
+    has_many :presents, :dependent => :destroy
+    has_many :comments, :dependent => :destroy
     has_many :replies, class_name: Comment, foreign_key: :reply_comment, dependent: :destroy
     
     #  def self.search(search)
