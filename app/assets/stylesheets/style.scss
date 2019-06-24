@@ -544,3 +544,26 @@ body.light .switch-wrap p span:nth-child(1):before {
     border-radius: 50%;
     box-shadow: 0 0 0 20px rgba(255,255,255,.1);
 }
+
+
+@media (max-width:  1000px ) {
+    .logo-wrap {
+        display:none;
+    }
+}
+
+@media (max-width:  670px ) {
+    .logo-wrap {
+        display:none;
+    }
+    
+    .switch-wrap h1 {
+        font-size: 23px;
+    }
+    
+    .menu-icon {
+        right: 30px;
+    }
+    
+
+}
