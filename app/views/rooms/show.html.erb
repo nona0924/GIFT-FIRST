@@ -127,6 +127,15 @@ body {
   transform: rotate(-35deg);
 }
 
+ @media (max-width: 1000px px ) {
+ 
+  
+}
+  
+  
+ @media (max-width: 670px ) {
+    
+}
 </style>
 <body>
 
@@ -148,7 +157,7 @@ body {
           <div class="mycomment">
               <p><%= m.message %>
                   <br><br>
-                  <small><%= m.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %><strong><a href="/users/<%= m.user_id %>"><%= m.user.name %></a></strong></small>
+                  <small><%= m.created_at.strftime("%Y-%-m-%-d %-H:%-M") %><strong><%= m.user.name %></strong></small>
               </p>
             </div>
           

@@ -114,7 +114,118 @@ img {
 }
 
 .point {
-    word-break: break-all;
+    color:gray;;
+    word-wrap: break-word;
+}
+
+.board_text {
+    text-align: center;
+    color: #070d13cf;
+    font-size: 35px;
+}
+
+@media (max-width: 1200px) {
+ .room-name2 {
+     height: auto;
+ }
+ 
+ .chenge {
+    display:inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.name {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.first {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.c-first {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.catego {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.c-second {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.third {
+  display: block;
+  top: 0;
+  left: 0;
+  width:250px;
+  box-shadow: 0 1px #6c757d63;
+}
+
+
+}
+  
+  
+ @media (max-width: 670px ) {
+    .room-name2 {
+     height: auto;
+ }
+ 
+ .chenge {
+    display:inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.name {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.first {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.c-first {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.catego {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.c-second {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.third {
+  display: block;
+  top: 0;
+  left: 0;
+  width:250px;
+  box-shadow: 0 1px #6c757d63;
+}
+
 }
 </style>
 
@@ -140,7 +251,7 @@ img {
 <br>
     <div class="room-name">
 <% if @products.blank?%>
-     <h1>該当する情報はありません</h1>
+     <h1 class="board_text">該当する情報はありません</h1>
         <br>
     <% else %>
      <% @products.each do |u| %>
@@ -153,7 +264,7 @@ img {
                 <div class="main">
                  <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>
                  <%if u.profile.present? %>
-                 <div><a href="/users/<%= u.id %>"><%= u.profile %></div>
+                 <div class="point"><%= u.profile %></div>
                  <% end %>
                  </div>
           </div>
