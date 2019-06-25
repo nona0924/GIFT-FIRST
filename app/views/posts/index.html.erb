@@ -81,12 +81,12 @@ img{
   <p class="main"><a href="/posts/<%= p.id %>"><%= User.find(p.user_id).name %></a></p>
   <p class="main"><a href="/posts/<%= p.id %>"><%= p.content %></a></p>
   <% if p.post_image.blank? %>
-  <%= p.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+  <%= p.created_at.strftime("%Y-%-m-%-d") %>
   <% else %>
   <a href="/posts/<%= p.id %>" data-lightbox="fuga" data-title="hoge">
    <p class="photo"><%= image_tag p.post_image.to_s%></p>
   </a>
-  <%= p.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+  <%= p.created_at.strftime("%Y-%-m-%-d") %>
   <% end %>
   </div>
   <% end %>

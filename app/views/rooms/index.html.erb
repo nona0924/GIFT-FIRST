@@ -49,7 +49,7 @@ body {
  <div class="posts-heading">
   <a href="/rooms/<%= e.room_id %>"><%= e.room.room_name %></a>
   <br>
- <%= e.room.updated_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+ <%= e.room.updated_at.strftime("%Y-%-m-%-d %-H:%-M") %>
   </div>
 <% end %>
 </div>

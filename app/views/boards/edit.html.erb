@@ -32,6 +32,8 @@ body {
       　<%= f.text_area :overview, :class => "form-control my-form", :maxlength => 300 %>
       　<p>住所</p>
       　<%= f.text_area :address, :class => "form-control my-form" %>
+      　<p>ギフト画像</p>
+        <%= f.file_field :image, :class => "form-control my-form" %>
       　
       　<%= f.hidden_field :category, :value => "プレゼント" %>
       　
@@ -41,8 +43,6 @@ body {
           　<p>品物の状態</p>
           　<%= p.select :status, [["新品、未使用", "新品、未使用"], ["未使用に近い", "未使用に近い"], ["目立った傷や汚れなし", "目立った傷や汚れなし"], ["やや傷や汚れあり", "やや傷や汚れあり"], ["傷や汚れあり", "傷や汚れあり"], ["全体的に状態が悪い", "全体的に状態が悪い"]],class:"form-control" %>
           　<br>
-          　<p>ギフト画像</p>
-            <%= p.file_field :image, :class => "form-control my-form" %>
 　      <% end %>
        <br>
        <%= f.submit "変更する", :class => "button-second"  %>
@@ -62,6 +62,8 @@ body {
           　<%= f.text_area :address, :class => "form-control my-form" %>
           　<p>カテゴリーを選択</p>
           　<%= f.select :category, [["スポーツ系", "スポーツ系"], ["武道系", "武道系"], ["学習系", "学習系"], ["芸術系", "芸術系"], ["音楽系", "音楽系"], ["料理系", "料理系"]] ,class:"form-control" %>
+          　<p>画像</p>
+            <%= f.file_field :image, :class => "form-control my-form" %>
             　<%= fields_for @lesson do |l| %>
                 　<p>レッスンタイトル</p>
                 　<%= l.text_field :title, :class => "form-control my-form" %>
@@ -73,8 +75,6 @@ body {
                 　<%= l.time_field :start_time, :class => "form-control my-form" %>
                 　<p>終了時刻</p>
                 　<%= l.time_field :lesson_date, :class => "form-control my-form" %>
-                　<p>画像</p>
-                  <%= l.file_field :image, :class => "form-control my-form" %>
             　<% end %>
              <br>
             <%= f.submit "変更する", :class => "button-second"  %>

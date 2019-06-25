@@ -113,6 +113,7 @@ img{
       <br>
     <% if @user.user_type == "講師" %>
     <%= link_to "講師を評価する", "/evaluations/new/#{@user.id}", :class => "button-second" %>
+    <br><br>
     <%= link_to "講師の評価を見る", "/evaluations/#{@user.id}", :class => "button-second" %>
     <% end %>
     <% end %>
@@ -133,7 +134,7 @@ img{
         <% end %>
         <div class="posts-heading">
         <p><a href="/rooms/<%= e.room.id %>"><strong><%= e.room.room_name %></strong></a><span class="numbers back"><%= count %></span></p>
-        <%= e.updated_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+        <%= e.updated_at.strftime("%Y-%-m-%-d") %>
         <br>
        
         </div>

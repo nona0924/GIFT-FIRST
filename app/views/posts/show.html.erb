@@ -99,7 +99,7 @@
       <%= image_tag @post.post_image.to_s, class: "photo-first" %>
       <% end %>
       <div class="post-time">
-        <%= @post.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+        <%= @post.created_at.strftime("%Y-%-m-%-d") %>
       </div>
       
       <% if Like.find_by(user_id:current_user.id, post_id: @post.id) %>

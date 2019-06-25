@@ -1,10 +1,14 @@
 class Board < ApplicationRecord
     
+    mount_uploader :image, ImageUploader
+    
     belongs_to :user
     has_many :lessons, :dependent => :destroy
     has_many :presents, :dependent => :destroy
     has_many :comments, :dependent => :destroy
     has_many :replies, class_name: Comment, foreign_key: :reply_comment, dependent: :destroy
+   
+   
     
     #  def self.search(search)
     #   if search

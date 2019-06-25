@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190602170819) do
+ActiveRecord::Schema.define(version: 20190625080915) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20190602170819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "category"
+    t.string   "image"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -58,12 +59,11 @@ ActiveRecord::Schema.define(version: 20190602170819) do
     t.integer  "board_id"
     t.string   "title"
     t.string   "target_age"
-    t.date     "lesson_date"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.string   "lesson_date"
+    t.string   "start_time"
+    t.string   "end_time"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "image"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -109,7 +109,6 @@ ActiveRecord::Schema.define(version: 20190602170819) do
     t.string   "gift_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "image"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -123,7 +122,7 @@ ActiveRecord::Schema.define(version: 20190602170819) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer  "user_id"   # 未使用6/6
+    t.integer  "user_id"
     t.string   "room_name",  default: "新規チャット"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -134,7 +133,7 @@ ActiveRecord::Schema.define(version: 20190602170819) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "unread_user_id"  #使わない6/6
+    t.integer  "unread_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -146,7 +145,7 @@ ActiveRecord::Schema.define(version: 20190602170819) do
     t.string   "name"
     t.string   "user_type"
     t.string   "gender"
-    t.date     "birdhday"
+    t.string   "birdhday"
     t.text     "profile"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false

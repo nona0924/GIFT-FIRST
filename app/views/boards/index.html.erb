@@ -99,6 +99,12 @@ body {
     color:red;
 }
 
+.board_text {
+    text-align: center;
+    color: #070d13cf;
+    font-size: 35px;
+}
+
 </style>
 
 
@@ -129,19 +135,14 @@ body {
 
 <div class="room-name">
     <% if @products.blank?%>
-        <% @boards.each do |e| %>
-          <div class="posts-heading">
-             <a href="/boards/<%= e.id %>"><%= e.title %></a>
-             <br>
-             <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
-           </div>
-        <% end %><br>
+       <h1 class="board_text">該当する情報はありません</h1>
+        <br>
 <% else%>
      <% @products.each do |e| %>
        <div class="posts-heading">
          <a href="/boards/<%= e.id %>"><%= e.title %></a>
          <br>
-         <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %></a>
+         <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d") %></a>
        </div><br>
 <% end %>
 <% end %>

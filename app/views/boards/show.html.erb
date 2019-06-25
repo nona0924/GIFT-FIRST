@@ -139,16 +139,16 @@ body {
         　<p>終了時刻</p>
         　<%= d.end_time %>
         　
-        　<% if d.image.blank? %>
+        　<% if @board.image.blank? %>
           <% else %>
           <p>画像</p>
-          <%= image_tag d.image.to_s, class: "photo-first" %>
+          <%= image_tag @board.image.to_s, class: "photo-first" %>
           <% end %>
         　<% end %>
         　
       
       <div class="post-time">
-        <%= @board.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+        <%= @board.created_at.strftime("%Y-%-m-%-d") %>
       </div>
        
        <% if user_signed_in? %> 
@@ -211,17 +211,17 @@ body {
          　<p>品物の状態</p>
          　<%= f.status %>
          　
-         　<% if f.image.blank? %>
+         　<% if @board.image.blank? %>
             <% else %>
             <p>品物画像</p>
-            <%= image_tag f.image.to_s, class: "photo-first" %>
+            <%= image_tag @board.image.to_s, class: "photo-first" %>
             <% end %>
          　
          　<% end %>
             
         <br>
       <div class="post-time">
-        <%= @board.created_at.strftime("%Y-%-m-%-d %-H:%-M:%-S") %>
+        <%= @board.created_at.strftime("%Y-%-m-%-d") %>
       </div>
      
       <% if @board.user_id == current_user.id %>

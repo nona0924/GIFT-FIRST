@@ -38,18 +38,18 @@ end
   def create
       @user = User.find(current_user.id)
     if @user.user_type == "講師"
-      @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address, :category).merge(:user_id => current_user.id))
+      @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address, :category, :image).merge(:user_id => current_user.id))
       logger.debug("======================== Lesson  = #{@board.id}")
       if params[:board][:category] == "プレゼント"
-        @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+        @present = Present.create(params.require(:present).permit(:board_id, :status, :gift_name).merge(:board_id => @board.id))
       else 
-         @lesson = Lesson.create(params.require(:lesson).permit(:board_id, :title, :image, :target_age, :lesson_date, :start_time, :end_time).merge(:board_id => @board.id))
+         @lesson = Lesson.create(params.require(:lesson).permit(:board_id, :title, :target_age, :lesson_date, :start_time, :end_time).merge(:board_id => @board.id))
       end
       flash[:notice] = "投稿を作成しました"
       redirect_to("/boards")
    else
-     @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address, :category).merge(:user_id => current_user.id))
-     @present = Present.create(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+     @board = Board.create(params.require(:board).permit(:user_id, :title, :overview, :address, :category, :image).merge(:user_id => current_user.id))
+     @present = Present.create(params.require(:present).permit(:board_id, :status, :gift_name).merge(:board_id => @board.id))
      flash[:notice] = "投稿を作成しました"
       redirect_to("/boards")
   end
@@ -71,16 +71,16 @@ end
       @board = Board.find(params[:id])
       @user = User.find(@board.user_id)
       if @board.user_id == current_user.id
-          @board = Board.update(params.require(:board).permit(:user_id, :title, :overview, :address, :category).merge(:user_id => current_user.id))
-       if @board.category == "プレゼント"
-           @present = Present.update(params.require(:present).permit(:board_id, :status, :image, :gift_name).merge(:board_id => @board.id))
+          @board = Board.update(params.require(:board).permit(:user_id, :title, :overview, :address, :category, :image).merge(:user_id => current_user.id))
+       if params[:board][:category] == "プレゼント"
+           @present = Present.update(params.require(:present).permit(:board_id, :status, :gift_name))
       else 
-           @lesson = Lesson.update(params.require(:lesson).permit(:board_id, :title, :image, :target_age, :lesson_date, :start_time, :end_time).merge(:board_id => @board.id))
+           @lesson = Lesson.update(params.require(:lesson).permit(:board_id, :title, :target_age, :lesson_date, :start_time, :end_time))
       end
       flash[:notice] = "投稿を編集しました"
-      redirect_to("/posts")
+      redirect_to("/boards")
     else
-      redirect_to ("/posts")
+      redirect_to ("/boards")
       flash[:alert] = "無効なユーザー"
   end
   end

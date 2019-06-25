@@ -112,6 +112,10 @@ img {
 .third:hover{
     color:red;
 }
+
+.point {
+    word-break: break-all;
+}
 </style>
 
 <h1>ユーザー一覧</h1>
@@ -136,21 +140,7 @@ img {
 <br>
     <div class="room-name">
 <% if @products.blank?%>
-     <% @users.each do |u| %>
-      <div class="posts-heading">
-        <% if u.icon? %>
-             <%= image_tag u.icon.to_s %>
-            <% else %>
-            <%= image_tag("image6.jpg") %>
-          <% end %>
-                <div class="main">
-                 <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>
-                 <%if u.profile.present? %>
-                 <div><a href="/users/<%= u.id %>"><%= u.profile %></a></div>
-                 <% end %>
-                 </div>
-          </div>
-        <% end %>
+     <h1>該当する情報はありません</h1>
         <br>
     <% else %>
      <% @products.each do |u| %>
@@ -163,7 +153,7 @@ img {
                 <div class="main">
                  <div><a href="/users/<%= u.id %>"><%= u.name %>さん</a></div>
                  <%if u.profile.present? %>
-                 <div><a href="/users/<%= u.id %>"><%= u.profile %></a></div>
+                 <div><a href="/users/<%= u.id %>"><%= u.profile %></div>
                  <% end %>
                  </div>
           </div>
