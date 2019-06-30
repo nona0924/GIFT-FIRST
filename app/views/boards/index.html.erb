@@ -99,6 +99,10 @@ body {
     color:red;
 }
 
+ .colo {
+     color: gray;
+ }
+
 .board_text {
     text-align: center;
     color: #070d13cf;
@@ -247,7 +251,9 @@ body {
        <div class="posts-heading">
          <a href="/boards/<%= e.id %>"><%= e.title %></a>
          <br>
-         <a href="/boards/<%= e.id %>"><%= e.category %><br><%= e.created_at.strftime("%Y-%-m-%-d") %></a>
+         <p class="colo">カテゴリ：<%= e.category %></p>
+         <p class="colo">作成日：<%= e.created_at.strftime("%Y-%-m-%-d") %></a>
+         
        </div><br>
 <% end %>
 <% end %>
