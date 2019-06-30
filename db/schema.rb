@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190625080915) do
+ActiveRecord::Schema.define(version: 20190630051004) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20190625080915) do
     t.integer  "board_id"
     t.string   "title"
     t.string   "target_age"
-    t.string   "lesson_date"
+    t.date     "lesson_date"
     t.string   "start_time"
     t.string   "end_time"
     t.datetime "created_at",  null: false
