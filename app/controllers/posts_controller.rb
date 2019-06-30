@@ -3,9 +3,14 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
     
   def show
+    if user_signed_in?
       @post = Post.find(params[:id])
       @user = User.find(@post.user_id)
       @likes_count = Like.where(post_id: @post.id).count
+    else
+      redirect_to("/")
+      flash[:alert] = "新規登録が必要です"
+    end
   end
 
   def index
