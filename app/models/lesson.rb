@@ -12,9 +12,11 @@ class Lesson < ApplicationRecord
     
 
      def date_cannot_be_in_the_past
+         if lesson_date.present?
     #   if lesson_date.present? && lesson_date < Date.today
     #     errors.add(:lesson_date, ": 過去の日付は使用できません")
     #   end
+   end
   end
   
     

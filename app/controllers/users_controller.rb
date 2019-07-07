@@ -7,8 +7,18 @@ class UsersController < ApplicationController
     if @user.id == current_user.id
       @entries = current_user.entries
     else
-      @room = Room.new
-      @entry = Entry.new
+      Entry.where(user_id: @user.id).each do |eu|
+        logger.debug("===================================controller_____!!!!!!!!!!!!!!!!!!!!!!eueu#{eu.room_id}")
+           @room = Room.find_by(id: Entry.find_by(room_id: eu.room_id, user_id: current_user.id).room_id)
+           logger.debug("===================================controller_____!!!!!!!!!!!!!!!!!!!!!!@rooooooooom#{Entry.find_by(room_id: eu.room_id, user_id: current_user.id).id}")
+           if @room.present?
+             logger.debug("===================================controller_____!!!!room_id#{@room.id}")
+           end
+      end
+      if !@room.present?
+         @room = Room.new
+         @entry = Entry.new
+      end
     end
   end
   

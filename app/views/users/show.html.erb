@@ -104,13 +104,18 @@ img{
 <% if @user.id == current_user.id %>
 <p><a href="/users/edit" class="button-second">ユーザー情報を編集する</a>
 <% else %>
+      <% if Entry.where(user_id: @user.id).blank? %>
       <%= form_for @room do |f| %>
        <%= fields_for @entry do |e| %>
         <%= e.hidden_field :user_id, :value => @user.id %>
       <% end %>
         <%= f.submit "チャットを始める", :class => "button-second" %>
       <% end %>
-      <br>
+      <% else %>
+      <% logger.debug("=========================================@room.id = #{@room.id}")%>
+      <%= link_to "トーク画面へ", "/rooms/#{@room.id}", :class => "button-second" %>
+      <% end %>
+      <br><br>
     <% if @user.user_type == "講師" %>
     <%= link_to "講師を評価する", "/evaluations/new/#{@user.id}", :class => "button-second" %>
     <br><br>
